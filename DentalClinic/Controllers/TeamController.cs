@@ -12,13 +12,20 @@ namespace DentalClinic.Controllers
         {
             doctorService = _doctorService;
         }
+        [HttpGet]
         public async Task<IActionResult> Team()
         {
             var doctors = await doctorService.GetAll();
             return View(doctors);
         }
 
-        public IActionResult SaveReview()
+        [HttpPost]
+        public async Task<IActionResult> Team(string doctor)
+        {
+            return RedirectToAction(nameof(Booked));
+        }
+
+        public IActionResult Booked(string doctor)
         {
             return View();
         }
