@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DentalClinic.DB.Data.Models
 {
-    public class Doctors
+    public class Doctor
     {
         [Key]
         public Guid Id { get; set; }
@@ -18,6 +18,9 @@ namespace DentalClinic.DB.Data.Models
         public string Qualification { get; set; }
         [Required]
         public string MoreInfo { get; set; }
+
+        [Range(0,1)]
+        public byte IsActive { get; set; }
 
         [Required]
         public Guid Who { get; set; }

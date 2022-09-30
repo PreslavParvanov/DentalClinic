@@ -32,7 +32,7 @@ namespace DentalClinic.Controllers
                 return View(model);
             }
             await doctorService.Save(model);
-            return View();
+            return RedirectToAction(nameof(CreateDentist)); 
         }
     }
 }

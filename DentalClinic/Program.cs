@@ -1,6 +1,7 @@
 using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Service;
-using DentalClinic.Data;
+using DentalClinic.DB.Data;
+using DentalClinic.DB.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 
