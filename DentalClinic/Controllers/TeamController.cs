@@ -25,7 +25,8 @@ namespace DentalClinic.Controllers
             return RedirectToAction(nameof(Booked));
         }
 
-        public IActionResult Booked(string doctor)
+        [HttpGet]
+        public IActionResult Booked()
         {
             return View();
         }
