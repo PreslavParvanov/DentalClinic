@@ -31,7 +31,7 @@ namespace DentalClinic.Controllers
             {
                 return View(model);
             }
-            await doctorService.Save(model);
+            await doctorService.Create(model);
             return RedirectToAction(nameof(CreateDentist)); 
         }
     }
