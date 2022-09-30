@@ -51,7 +51,7 @@ namespace DentalClinic.BL.Service
                 }).ToListAsync();
         }
 
-        public async Task Save(DoctorViewModel doctorViewModel)
+        public async Task Create(DoctorViewModel doctorViewModel)
         {
             var doctor = new Doctor()
             {
