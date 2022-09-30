@@ -20,9 +20,9 @@ namespace DentalClinic.DB.Data.Models
         public string MoreInfo { get; set; }
 
         [Required]
-        Guid Who { get; set; }
+        public Guid Who { get; set; }
 
         [Required]
-        DateTime When { get; set; }
+        public DateTime When { get; set; }
     }
 }

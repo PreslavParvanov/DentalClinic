@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using DentalClinic.DB.Data.Models;
 
 namespace DentalClinic.BL.Service
 {
@@ -25,6 +26,22 @@ namespace DentalClinic.BL.Service
 
             string data = await File.ReadAllTextAsync(dataPath);
             return JsonConvert.DeserializeObject<IEnumerable<DoctorViewModel>>(data);
+        }
+
+        public async Task<IEnumerable<DoctorViewModel>> Save(DoctorViewModel doctorViewModel)
+        {
+            var doctor = new Doctors()
+            {
+                Name = doctorViewModel.Name,
+                Qualification = doctorViewModel.Qualification,
+                MoreInfo = doctorViewModel.MoreInfo,
+                Who = doctorViewModel.Who,
+                When = DateTime.Now
+            };
+
+            //await repo.AddAsync(doctor);
+            //await repo.SaveChangesAsync();
+            return null;
         }
     }
 }
