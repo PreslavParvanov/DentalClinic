@@ -24,6 +24,7 @@ namespace DentalClinic.DB.Data.Models
 
         [Required]
         public Guid Who { get; set; }
+        public virtual User Users { get; set; }
 
         [Required]
         public DateTime When { get; set; }

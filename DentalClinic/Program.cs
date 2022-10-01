@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
