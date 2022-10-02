@@ -19,9 +19,28 @@ namespace DentalClinic.Controllers
             userService = _userService;
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(UserViewModel userViewModel)
+        {
+            if (userViewModel.Email.Length < 1 || userViewModel.Password.Length < 1)
+            {
+                return View();
+            }
+            string result = await userService.Get(userViewModel);
+            if (result=="Error")
+            {
+                return View("InvalidUser");
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         [HttpGet]
@@ -43,6 +62,11 @@ namespace DentalClinic.Controllers
             }
             await userService.Create(model);
             return RedirectToAction(nameof(Login));
+        }
+
+        public IActionResult SignOut()
+        {
+            return Redirect("/");
         }
     }
 }

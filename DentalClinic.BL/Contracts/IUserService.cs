@@ -9,7 +9,7 @@ namespace DentalClinic.BL.Contracts
 {
     public interface IUserService
     {
-        Task<UserViewModel> Get();
+        Task<string> Get(UserViewModel userViewModel);
         Task Create(UserViewModel userViewModel);
     }
 }

@@ -11,16 +11,19 @@ using Newtonsoft.Json;
 using DentalClinic.DB.Data.Models;
 using DentalClinic.DB.Common;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinic.BL.Service
 {
     public class UserService : IUserService
     {
         private readonly IConfiguration config;
+        private List<UserViewModel> users;
 
         public UserService(IConfiguration _config)
         {
             config = _config;
+            users  = new List<UserViewModel>();
         }
 
 
@@ -38,14 +41,27 @@ namespace DentalClinic.BL.Service
             repo = _repo;
         }
 
-        public async Task<UserViewModel> Get()
+        public async Task<string> Get(UserViewModel userViewModel)
         {
-            return await repo.AllReadonly<User>()
+            users = await repo.AllReadonly<User>()
+                .Where(x => x.Email == userViewModel.Email)
+                .Where(x => x.Password == userViewModel.Password)
                 .Select(u => new UserViewModel()
                 {
                     Id = u.Id,
-                    FirstName = u.FirstName
-                }).FirstAsync();
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                })
+                .ToListAsync();
+
+            if (users.Count==0)
+            {
+                return "Error";
+            }
+            else
+            {
+                return users[0].FirstName + users[0].LastName;
+            }
         }
 
         public async Task Create(UserViewModel userViewModel)
