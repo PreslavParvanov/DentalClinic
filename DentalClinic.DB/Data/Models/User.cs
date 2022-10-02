@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -21,6 +16,8 @@ namespace DentalClinic.DB.Data.Models
         public string LastName { get; set; }
 
         [Required]
+        //[Index(nameof(Email), IsUnique = true,Name = "EmailIndex")]
+
         public string Email { get; set; }
 
         [Required]

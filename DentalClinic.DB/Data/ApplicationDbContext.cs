@@ -14,19 +14,22 @@ namespace DentalClinic.DB.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<Doctor>(entity =>
             {
                 entity.HasOne(m => m.Users)
                     .WithMany(g => g.Doctors)
                     .HasForeignKey(m => m.Who)
                     .HasConstraintName("FK_Doctors_Users");
+                
             });
+           
         }
 
         public DbSet<Doctor> Doctors { get; set; }

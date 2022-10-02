@@ -3,43 +3,41 @@
     ViewData["Title"] = "Registration";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="../css/registration.css" type="text/css" rel="stylesheet">
+<h1 class="registration">Registration</h1>
+<form class="registration-form" method="post">
+    <div class="form-field">
+        <input asp-for="FirstName" type="text" name="FirstName" placeholder="First name" required />
+    </div>
+    <span asp-validation-for="FirstName" class="small text-danger"></span>
 
-</head>
-<body>
-    <h1 class="registration">Registration</h1>
-    <form class="registration-form" method="post">
-        <div class="form-field">
-            <input asp-for="FirstName" type="text" name="FirstName" placeholder="First name" required />
-        </div>
+    <div class="form-field">
+        <input id="lastname" asp-for="LastName" type="text" name="LastName" placeholder="Last name" required />
+    </div>
+    <span asp-validation-for="LastName" class="small text-danger"></span>
 
-        <div class="form-field">
-            <input asp-for="LastName" type="text" name="LastName" placeholder="Last name" required />
-        </div>
+    <div class="form-field">
+        <input asp-for="Email" type="email" name="Email" placeholder="Email" required />
+    </div>
+    <span asp-validation-for="Email" class="small text-danger"></span>
 
-        <div class="form-field">
-            <input asp-for="Email" type="email" name="Email" placeholder="Email" required />
-        </div>
+    <div class="form-field">
+        <input asp-for="Phonenumber" type="text" name="Phonenumber" placeholder="Phone number" required />
+    </div>
+    <span asp-validation-for="Phonenumber" class="small text-danger"></span>
 
-        <div class="form-field">
-            <input asp-for="Phonenumber" type="text" name="Phonenumber" placeholder="Phone number" required />
-        </div>
+    <div class="form-field">
+        <input asp-for="Password" type="password" name="Password" placeholder="Password" required />
+    </div>
+    <span asp-validation-for="Password" class="small text-danger"></span>
+    <div class="form-field">
+        <input type="password" asp-for="RePassword" type="password" name="RePassword" placeholder="Repassword" required />
+    </div>
+    <span asp-validation-for="RePassword" class="small text-danger"></span>
+    <div class="form-field">
+        <button class="btn" type="submit">Registration</button>
+    </div>
+</form>
 
-        <div class="form-field">
-            <input asp-for="Password" type="password" name="Password" placeholder="Password" required />
-        </div>
-
-        <div class="form-field">
-            <input type="password" placeholder="Repassword" required />
-        </div>
-
-        <div class="form-field">
-            <button class="btn" type="submit">Registration</button>
-        </div>
-    </form>
-</body>
-</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

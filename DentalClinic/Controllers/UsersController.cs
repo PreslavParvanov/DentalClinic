@@ -37,6 +37,10 @@ namespace DentalClinic.Controllers
             {
                 return View(model);
             }
+            if(model.Password != model.RePassword)
+            {
+                return View(model);
+            }
             await userService.Create(model);
             return RedirectToAction(nameof(Login));
         }
