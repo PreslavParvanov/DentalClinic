@@ -33,9 +33,14 @@ namespace DentalClinic.Controllers
                 return View();
             }
             string result = await userService.Get(userViewModel);
-            if (result=="Error")
+            ViewBag.Message = result;
+            if (result== "User does not exist!")
             {
-                return View("InvalidUser");
+                return View(nameof(Login), userViewModel);
+            }
+            else if (result == "Invalid password!")
+            {
+                return View(nameof(Login), userViewModel);
             }
             else
             {

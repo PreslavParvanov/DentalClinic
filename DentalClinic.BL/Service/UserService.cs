@@ -45,22 +45,26 @@ namespace DentalClinic.BL.Service
         {
             users = await repo.AllReadonly<User>()
                 .Where(x => x.Email == userViewModel.Email)
-                .Where(x => x.Password == userViewModel.Password)
                 .Select(u => new UserViewModel()
                 {
                     Id = u.Id,
                     FirstName = u.FirstName,
-                    LastName = u.LastName
+                    LastName = u.LastName,
+                    Password = u.Password
                 })
                 .ToListAsync();
 
             if (users.Count==0)
             {
-                return "Error";
+                return "User does not exist!";
+            }
+            else if (users[0].Password != userViewModel.Password)
+            {
+                return "Invalid password!";
             }
             else
             {
-                return users[0].FirstName + users[0].LastName;
+                return $"- {users[0].FirstName},{users[0].LastName}";
             }
         }
 
