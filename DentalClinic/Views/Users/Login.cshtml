@@ -15,7 +15,7 @@
     <span asp-validation-for="Password" class="small text-danger"></span>
     <p>@ViewBag.Message</p>
     <div class="form-field">
-        <button class="login-form-btn" type="submit">Log in</button>
+        <button class="login-form-btn" onclick="test()" type="submit">Log in</button>
     </div>
     <div class="form-field">
         <a class="reg" asp-controller="Users" asp-action="Registration">Registration</a>
@@ -24,4 +24,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+     
 }
