@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IErrorService, ErrorService>();
 
 var app = builder.Build();
 

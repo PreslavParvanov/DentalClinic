@@ -45,7 +45,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="SignOut">Sign out</a>
+                            <a id='nav-sign-out' class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="SignOut">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -67,6 +67,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/Test.js" asp-append-version="true"></script>
+    <script src="~/js/NavBarController.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

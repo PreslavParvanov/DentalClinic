@@ -12,10 +12,13 @@ namespace DentalClinic.Controllers
     public class AdminController : Controller
     {
         private readonly IDoctorService doctorService;
+        private readonly IErrorService errorService;
 
-        public AdminController(IDoctorService _doctorService)
+
+        public AdminController(IDoctorService _doctorService, IErrorService _errorService)
         {
             doctorService = _doctorService;
+            errorService = _errorService;
         }
 
         [HttpGet]
@@ -31,7 +34,16 @@ namespace DentalClinic.Controllers
             {
                 return View(model);
             }
-            await doctorService.Create(model);
+            try
+            {
+                await doctorService.Create(model);
+                throw new IndexOutOfRangeException("Опраив индекса");
+            }
+            catch (Exception ex)
+            {
+                await errorService.DCLog(ex);
+                return View(model);
+            }
             return RedirectToAction(nameof(CreateDentist)); 
         }
     }
