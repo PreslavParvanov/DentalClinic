@@ -1,38 +1,38 @@
-﻿@model UserViewModel
+﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Registration";
 }
 
 <h1 class="registration">Registration</h1>
 <form class="registration-form" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-field">
         <input asp-for="FirstName" type="text" name="FirstName" placeholder="First name" required />
     </div>
     <span asp-validation-for="FirstName" class="small text-danger"></span>
 
     <div class="form-field">
-        <input id="lastname" asp-for="LastName" type="text" name="LastName" placeholder="Last name" required />
+        <input id="LastName" type="text" name="LastName" placeholder="Last name" required />
     </div>
     <span asp-validation-for="LastName" class="small text-danger"></span>
-
     <div class="form-field">
         <input asp-for="Email" type="email" name="Email" placeholder="Email" required />
     </div>
     <span asp-validation-for="Email" class="small text-danger"></span>
 
     <div class="form-field">
-        <input asp-for="Phonenumber" type="text" name="Phonenumber" placeholder="Phone number" required />
+        <input asp-for="PhoneNumber" type="text" name="PhoneNumber" placeholder="Phone number" required />
     </div>
-    <span asp-validation-for="Phonenumber" class="small text-danger"></span>
+    <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
 
     <div class="form-field">
         <input asp-for="Password" type="password" name="Password" placeholder="Password" required />
     </div>
     <span asp-validation-for="Password" class="small text-danger"></span>
     <div class="form-field">
-        <input type="password" asp-for="RePassword" type="password" name="RePassword" placeholder="Repassword" required />
+        <input type="ConfirmPassword" asp-for="ConfirmPassword" type="password" name="ConfirmPassword" placeholder="Repassword" required />
     </div>
-    <span asp-validation-for="RePassword" class="small text-danger"></span>
+    <span asp-validation-for="ConfirmPassword" class="small text-danger"></span>
     <div class="form-field">
         <button class="btn" type="submit">Registration</button>
     </div>

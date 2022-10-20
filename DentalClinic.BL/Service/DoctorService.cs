@@ -59,7 +59,7 @@ namespace DentalClinic.BL.Service
                 Qualification = doctorViewModel.Qualification,
                 MoreInfo = doctorViewModel.MoreInfo,
                 IsActive = 1,
-                Who = doctorViewModel.Who,
+                Who=doctorViewModel.Who,
                 When = DateTime.Now
             };
 

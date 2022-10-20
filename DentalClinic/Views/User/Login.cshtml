@@ -1,10 +1,11 @@
-﻿@model UserViewModel
+﻿@model LoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
 
 <h1 class="login">Login</h1>
 <form class="login-form" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-field">
         <input asp-for="Email" type="email" name="Email" placeholder="Email" required />
     </div>
@@ -18,7 +19,7 @@
         <button class="login-form-btn" onclick="test()" type="submit">Log in</button>
     </div>
     <div class="form-field">
-        <a class="reg" asp-controller="Users" asp-action="Registration">Registration</a>
+        <a class="reg" asp-controller="User" asp-action="Registration">Registration</a>
     </div>
 </form>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,13 @@ namespace DentalClinic.DB.Data.Models
         public byte IsActive { get; set; }
 
         [Required]
-        public Guid Who { get; set; }
-        public virtual User Users { get; set; }
+        public string Who { get; set; }
 
+        public User Users { get; set; }
         [Required]
         public DateTime When { get; set; }
+
+        
+
     }
 }

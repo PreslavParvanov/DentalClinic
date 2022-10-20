@@ -4,6 +4,7 @@ using DentalClinic.DB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalClinic.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221020203701_Doctor")]
+    partial class Doctor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,11 +50,9 @@ namespace DentalClinic.DB.Migrations
 
                     b.Property<string>("Who")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Who");
 
                     b.ToTable("Doctors");
                 });
@@ -272,18 +272,6 @@ namespace DentalClinic.DB.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
-                {
-                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
-                        .WithMany("Doctors")
-                        .HasForeignKey("Who")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Doctors_Users");
-
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -333,11 +321,6 @@ namespace DentalClinic.DB.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
-                {
-                    b.Navigation("Doctors");
                 });
 #pragma warning restore 612, 618
         }

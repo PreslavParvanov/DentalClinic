@@ -24,6 +24,7 @@ namespace DentalClinic.Controllers
         [HttpGet]
         public IActionResult CreateDentist()
         {
+            var model = new DoctorViewModel();
             return View();
         }
 
@@ -37,14 +38,15 @@ namespace DentalClinic.Controllers
             try
             {
                 await doctorService.Create(model);
-                throw new IndexOutOfRangeException("Опраив индекса");
+                
+                return RedirectToAction("Team", "Team");
             }
             catch (Exception ex)
             {
                 await errorService.DCLog(ex);
                 return View(model);
             }
-            return RedirectToAction(nameof(CreateDentist)); 
+           
         }
     }
 }
