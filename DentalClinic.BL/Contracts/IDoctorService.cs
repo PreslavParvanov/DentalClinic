@@ -9,7 +9,10 @@ namespace DentalClinic.BL.Contracts
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<DoctorViewModel>> GetAll();
+        Task<IEnumerable<GetDoctorViewModel>> GetDoctorById(Guid doctorViewModel);
+        Task<IEnumerable<GetDoctorViewModel>> GetAll();
         Task Create(DoctorViewModel doctorViewModel);
+
+        
     }
 }

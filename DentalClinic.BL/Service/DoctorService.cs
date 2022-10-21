@@ -38,17 +38,19 @@ namespace DentalClinic.BL.Service
             repo = _repo;
         }
 
-        public async Task<IEnumerable<DoctorViewModel>> GetAll()
-        {
-            return await repo.AllReadonly<Doctor>()
+        public async Task<IEnumerable<GetDoctorViewModel>> GetAll()
+        {      
+                var result = await repo.AllReadonly<Doctor>()
                 .Where(d => d.IsActive==1)
-                .Select(d => new DoctorViewModel()
+                .Select(d => new GetDoctorViewModel()
                 {
                     Id = d.Id,
                     Name = d.Name,
                     Qualification = d.Qualification,
                     MoreInfo = d.MoreInfo
                 }).ToListAsync();
+
+            return result;
         }
 
         public async Task Create(DoctorViewModel doctorViewModel)
@@ -59,12 +61,28 @@ namespace DentalClinic.BL.Service
                 Qualification = doctorViewModel.Qualification,
                 MoreInfo = doctorViewModel.MoreInfo,
                 IsActive = 1,
-                Who=doctorViewModel.Who,
+                Who = doctorViewModel.Who,
                 When = DateTime.Now
             };
 
             await repo.AddAsync(doctor);
             await repo.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<GetDoctorViewModel>> GetDoctorById(Guid doctorId)
+        {
+            var result = await repo.AllReadonly<Doctor>()
+                .Where(d => d.IsActive == 1)
+                .Where(d => d.Id== doctorId)
+                .Select(d => new GetDoctorViewModel()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Qualification = d.Qualification,
+                    MoreInfo = d.MoreInfo
+                }).ToListAsync();
+
+            return result;
         }
     }
 }

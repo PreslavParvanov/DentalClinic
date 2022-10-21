@@ -5,28 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalClinic.DB.Data.Models
+namespace DentalClinic.BL.Models
 {
-    public class Doctor
+    public class GetDoctorViewModel
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
+        public Guid Id { get; set; }
+        
+        [Required]
+        [MinLength(1), MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
+        [MinLength(1),MaxLength(100)]
         public string Qualification { get; set; }
+
         [Required]
+        [MinLength(1), MaxLength(1000)]
         public string MoreInfo { get; set; }
 
-        [Range(0,1)]
-        public byte IsActive { get; set; }
-
-        [Required]
-        public Guid Who { get; set; }
-        public virtual User Users { get; set; }
-
-        [Required]
-        public DateTime When { get; set; }
     }
 }

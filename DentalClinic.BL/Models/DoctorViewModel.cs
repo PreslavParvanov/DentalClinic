@@ -25,7 +25,7 @@ namespace DentalClinic.BL.Models
         public string MoreInfo { get; set; }
 
         [Required]
-        public string Who { get; set; }
+        public Guid Who { get; set; }
 
     }
 }
