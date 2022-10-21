@@ -20,11 +20,11 @@ builder.Services.AddSwaggerGen(c =>
         Description = "This is Dental Clinic Api",
         License = new Microsoft.OpenApi.Models.OpenApiLicense()
         {
-            Name = "EUPL v 1.0"
+            Name = "EUPL v 2.0"
         }
     });
 
-    //c.IncludeXmlComments("DentalClinicApiDocumentation.xml");
+    c.IncludeXmlComments("DentalClinicApiDocumentation.xml");
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

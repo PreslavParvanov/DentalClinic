@@ -3,17 +3,19 @@ using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DentalClinicApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]/[action]")]
+    
     public class TeamController : ControllerBase
     {
         private readonly IDoctorService doctorService;
         /// <summary>
-        /// 
+        /// DoctorService
         /// </summary>
         /// <param name="_doctorService"></param>
         public TeamController(IDoctorService _doctorService)
@@ -24,10 +26,10 @@ namespace DentalClinicApi.Controllers
         /// Get All doctors
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "Team")]
+        [HttpGet(Name = "GetAllDoctors")]
         [Produces("application/json")]
-        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(IEnumerable<DoctorViewModel>))]
-        public async Task<IActionResult> Team()
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(IEnumerable<GetDoctorViewModel>))]
+        public async Task<IActionResult> GetAllDoctors()
         {
             var teams = await doctorService.GetAll();
             if (teams == null)
@@ -42,8 +44,9 @@ namespace DentalClinicApi.Controllers
         /// </summary>
         /// <param name="doctorId"></param>
         /// <returns></returns>
-        [HttpGet(Name = "GetDoctorById")]
+        [HttpGet("{doctorId:guid}", Name = "GetDoctorById")]
         [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(IEnumerable<GetDoctorViewModel>))]
 
         public async Task<IActionResult> GetDoctorById(Guid doctorId)
         {
