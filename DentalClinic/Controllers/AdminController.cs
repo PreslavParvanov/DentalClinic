@@ -1,10 +1,12 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
+using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DentalClinic.Controllers
@@ -30,6 +32,8 @@ namespace DentalClinic.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDentist(DoctorViewModel model)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            model.Who = userId.ToString();
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -37,7 +41,6 @@ namespace DentalClinic.Controllers
             try
             {
                 await doctorService.Create(model);
-                throw new IndexOutOfRangeException("Опраив индекса");
             }
             catch (Exception ex)
             {
