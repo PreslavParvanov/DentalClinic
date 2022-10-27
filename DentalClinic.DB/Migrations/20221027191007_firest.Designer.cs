@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalClinic.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221001191328_AddUsers")]
-    partial class AddUsers
+    [Migration("20221027191007_firest")]
+    partial class firest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,55 +48,39 @@ namespace DentalClinic.DB.Migrations
                     b.Property<DateTime>("When")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Who")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Who")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Who");
 
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("IsActive")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("LastActive")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsBusy")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Phonenumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("DoctorId", "CustomerId");
 
-                    b.Property<DateTime>("When")
-                        .HasColumnType("datetime2");
+                    b.HasIndex("UsersId");
 
-                    b.Property<Guid>("Who")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
+                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -163,6 +147,10 @@ namespace DentalClinic.DB.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -214,6 +202,8 @@ namespace DentalClinic.DB.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -244,12 +234,10 @@ namespace DentalClinic.DB.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -286,12 +274,10 @@ namespace DentalClinic.DB.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -299,6 +285,64 @@ namespace DentalClinic.DB.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("IsActive")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Who")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
+                {
+                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
+                        .WithMany("Doctors")
+                        .HasForeignKey("Who")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Doctors_Users");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
+                {
+                    b.HasOne("DentalClinic.DB.Data.Models.Doctor", "Doctors")
+                        .WithMany("DoctorSchedules")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_DoctorSchedules_Doctors");
+
+                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
+                        .WithMany("DoctorSchedules")
+                        .HasForeignKey("UsersId");
+
+                    b.Navigation("Doctors");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -350,6 +394,18 @@ namespace DentalClinic.DB.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
+                {
+                    b.Navigation("DoctorSchedules");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
+                {
+                    b.Navigation("DoctorSchedules");
+
+                    b.Navigation("Doctors");
                 });
 #pragma warning restore 612, 618
         }

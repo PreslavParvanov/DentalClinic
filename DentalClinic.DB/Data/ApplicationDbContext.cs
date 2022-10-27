@@ -29,11 +29,30 @@ namespace DentalClinic.DB.Data
                     .HasConstraintName("FK_Doctors_Users");
                 
             });
-           
+
+                
+
+            modelBuilder.Entity<DoctorSchedule>(entity =>
+            {
+                entity.HasKey(ds => new { ds.DoctorId, ds.CustomerId });
+
+                entity.HasOne(d => d.Doctors)
+                    .WithMany(ds => ds.DoctorSchedules)
+                    .HasForeignKey(d => d.DoctorId)
+                    .HasConstraintName("FK_DoctorSchedules_Doctors");
+
+                /*entity.HasOne(u => u.Users)
+                    .WithMany(g => g.DoctorSchedules)
+                    .HasForeignKey(c => c.CustomerId)
+                    .HasConstraintName("FK_DoctorSchedules_Users");*/
+            });
+
         }
 
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<User> Users { get; set; } 
+
+        public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
 
      
     }

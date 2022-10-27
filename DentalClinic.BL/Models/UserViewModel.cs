@@ -10,18 +10,7 @@ namespace DentalClinic.BL.Models
 {
     public class UserViewModel
     {
-        [Required]
-        public Guid Id { get; set; }
         
-        [Required]
-        [MinLength(1), MaxLength(50)]
-        [RegularExpression(@"^\b([A-Z]{1}[a-z]+)+$", ErrorMessage = "Invalid First name!")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [MinLength(1), MaxLength(50)]
-        [RegularExpression(@"^\b([A-Z]{1}[a-z][-,a-z']*)+$", ErrorMessage = "Invalid Last name!")]
-        public string LastName { get; set; }
 
         [Required]
         [MinLength(1),MaxLength(50)]
@@ -29,18 +18,7 @@ namespace DentalClinic.BL.Models
         public string Email { get; set; }
 
         [Required]
-        [MinLength(1), MaxLength(15)]
-        public string Phonenumber { get; set; }
-
-        [Required]
         [MinLength(1), MaxLength(1000)]
         public string Password { get; set; }
-
-        [Required]
-        [MinLength(1), MaxLength(1000)]
-        public string RePassword { get; set; }
-
-        [Range(0, 1)]
-        public byte IsActive { get; set; }
     }
 }

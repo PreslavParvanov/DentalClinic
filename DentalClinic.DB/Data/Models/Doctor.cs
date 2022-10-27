@@ -11,6 +11,8 @@ namespace DentalClinic.DB.Data.Models
     {
         [Key]
         public Guid Id { get; set; }
+        public List<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
+
         [Required]
         public string Name { get; set; }
 
@@ -23,8 +25,8 @@ namespace DentalClinic.DB.Data.Models
         public byte IsActive { get; set; }
 
         [Required]
-        public Guid Who { get; set; }
-        public virtual User Users { get; set; }
+        public string Who { get; set; }
+        public User Users { get; set; }
 
         [Required]
         public DateTime When { get; set; }

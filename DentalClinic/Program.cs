@@ -4,6 +4,7 @@ using DentalClinic.DB.Data;
 using DentalClinic.DB.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DentalClinic.DB.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,12 +14,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequiredLength = 5;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDoctorService, DoctorService>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IErrorService, ErrorService>();
 

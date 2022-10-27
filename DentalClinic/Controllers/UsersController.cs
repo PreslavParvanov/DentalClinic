@@ -1,6 +1,9 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
+using DentalClinic.DB.Data.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,69 +12,105 @@ using System.Threading.Tasks;
 
 namespace DentalClinic.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
 
-        private readonly IUserService userService;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public UsersController(IUserService _userService)
+        public UsersController(
+                                UserManager<User> _userManager,
+                                SignInManager<User> _signInManager)
         {
-            userService = _userService;
+            userManager = _userManager;
+            signInManager = _signInManager;
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
-            return View();
+            var model = new UserViewModel();
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserViewModel userViewModel)
-        {
-            if (userViewModel.Email.Length < 1 || userViewModel.Password.Length < 1)
-            {
-                return View();
-            }
-            string result = await userService.Get(userViewModel);
-            ViewBag.Message = result;
-            if (result== "User does not exist!")
-            {
-                return View(nameof(Login), userViewModel);
-            }
-            else if (result == "Invalid password!")
-            {
-                return View(nameof(Login), userViewModel);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
-
-        [HttpGet]
-        public IActionResult Registration()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Registration(UserViewModel model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(UserViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            if(model.Password != model.RePassword)
+
+            var user = await userManager.FindByNameAsync(model.Email);
+
+            if (user != null)
+            {
+                var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            ModelState.AddModelError("", "Invalid login");
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Registration()
+        {
+            var model = new RegistrationViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Registration(RegistrationViewModel model)
+        {  
+
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            await userService.Create(model);
-            return RedirectToAction(nameof(Login));
+
+            var user = new User()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName=model.LastName,
+                Email = model.Email,
+                PhoneNumber = model.Phonenumber,
+                When = DateTime.Now,
+                IsActive=1
+            };
+
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            foreach (var item in result.Errors)
+            {
+                ModelState.AddModelError("", item.Description);
+            }
+            return View(model);
         }
 
-        public IActionResult SignOut()
+        public async Task<IActionResult> Logout()
         {
-            return Redirect("/");
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
