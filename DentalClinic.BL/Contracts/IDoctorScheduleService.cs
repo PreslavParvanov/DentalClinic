@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace DentalClinic.BL.Contracts
 {
-    public interface IDoctorCustomerService
+    public interface IDoctorScheduleService
     {
-        //Task<IEnumerable<DoctorScheduleViewModel>> GetAll();
-        Task CreateDoctorSchedule(DoctorCustomerViewModel doctorCustomerViewModel);
-        
-        
+        Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel);
+        Task<IEnumerable<Doctor>> GetDoctorsAsync();
     }
 }

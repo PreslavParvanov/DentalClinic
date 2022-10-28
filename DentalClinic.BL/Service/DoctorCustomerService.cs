@@ -73,18 +73,6 @@ namespace DentalClinic.BL.Service
             await repo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Doctor>> GetDoctorsAsync()
-        {
-            var result = await repo.AllReadonly<Doctor>()
-                .Select(d => new Doctor()
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    Qualification = d.Qualification,
-                    MoreInfo = d.MoreInfo,
-                    Who = d.Who
-                }).ToListAsync();
-            return result;
-        }
+       
     }
 }

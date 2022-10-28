@@ -15,17 +15,20 @@ namespace DentalClinic.Controllers
     {
         private readonly IDoctorService doctorService;
         private readonly IDoctorCustomerService doctorCustomerService;
+        private readonly IDoctorScheduleService doctorScheduleService;
         private readonly IErrorService errorService;
 
 
         public AdminController(
             IDoctorService _doctorService, 
             IErrorService _errorService,
-            IDoctorCustomerService _doctorCustomerService)
+            IDoctorCustomerService _doctorCustomerService,
+            IDoctorScheduleService _doctorScheduleService)
         {
             doctorService = _doctorService;
             errorService = _errorService;
             doctorCustomerService = _doctorCustomerService;
+            doctorScheduleService = _doctorScheduleService;
         }
 
         [HttpGet]
@@ -58,12 +61,30 @@ namespace DentalClinic.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateSchedule()
         {
-            var model = new DoctorCustomerViewModel()
+            var model = new DoctorScheduleViewModel()
             {
-                Doctors = await doctorCustomerService.GetDoctorsAsync()
+                Doctors = await doctorScheduleService.GetDoctorsAsync()
             };
             return View(model);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            doctorScheduleViewModel.Who = userId.ToString();
+
+            if (ModelState.IsValid)
+            {
+                return View(doctorScheduleViewModel);
+            }
+            if (doctorScheduleViewModel.endDate<= doctorScheduleViewModel.startDate)
+            {
+                ModelState.AddModelError("", "endDate is < or = on startDate!");
+            }
+            await doctorScheduleService.CreateSchedule(doctorScheduleViewModel);
+            return RedirectToAction(nameof(CreateSchedule));
         }
     }
 }

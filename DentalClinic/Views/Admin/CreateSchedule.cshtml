@@ -1,11 +1,23 @@
-﻿@model DoctorCustomerViewModel
+﻿@model DoctorScheduleViewModel
 
-<select asp-for="@Model.DoctorId" class="form-control">
-    @foreach (var doctor in Model.Doctors)
-    {
-        <option value="@doctor.Id">@doctor.Name</option>
-    }
-</select>
-
-<input type="datetime-local" id="startDate" name="startDate">
-<input type="datetime-local" id="endDate" name="endDate">
+<form class="create-dentist-form" method="post">
+    <div class="form-field">
+        <select asp-for="@Model.DoctorId" class="form-control">
+            @foreach (var doctor in Model.Doctors)
+            {
+                <option value="@doctor.Id">@doctor.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-field">
+        <input asp-for="@Model.startDate" type="datetime-local" id="startDate" name="startDate">
+    </div>
+    <span asp-validation-for="@Model.startDate" class="small text-danger"></span>
+    <div class="form-field">
+        <input asp-for="@Model.endDate" type="datetime-local" id="endDate" name="endDate">
+    </div>
+    <span asp-validation-for="@Model.endDate" class="small text-danger"></span>
+    <div class="form-field">
+        <button class="btn" type="submit">Save</button>
+    </div>
+</form>
