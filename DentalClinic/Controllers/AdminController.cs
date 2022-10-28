@@ -82,6 +82,7 @@ namespace DentalClinic.Controllers
             if (doctorScheduleViewModel.endDate<= doctorScheduleViewModel.startDate)
             {
                 ModelState.AddModelError("", "endDate is < or = on startDate!");
+                return View(doctorScheduleViewModel);
             }
             await doctorScheduleService.CreateSchedule(doctorScheduleViewModel);
             return RedirectToAction(nameof(CreateSchedule));
