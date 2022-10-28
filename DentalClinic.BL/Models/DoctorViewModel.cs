@@ -9,7 +9,9 @@ namespace DentalClinic.BL.Models
 {
     public class DoctorViewModel
     {
-        
+        [Required]
+        public Guid Id { get; set; }
+
         [Required]
         [MinLength(1), MaxLength(50)]
         public string Name { get; set; }

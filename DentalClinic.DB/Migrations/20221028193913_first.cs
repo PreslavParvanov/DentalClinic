@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DentalClinic.DB.Migrations
 {
-    public partial class firest : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,6 @@ namespace DentalClinic.DB.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<byte>(type: "tinyint", nullable: true),
-                    Who = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     When = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastActive = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -101,8 +100,8 @@ namespace DentalClinic.DB.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -146,8 +145,8 @@ namespace DentalClinic.DB.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -185,7 +184,7 @@ namespace DentalClinic.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DoctorSchedules",
+                name: "DoctorsCustomers",
                 columns: table => new
                 {
                     DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -196,18 +195,18 @@ namespace DentalClinic.DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DoctorSchedules", x => new { x.DoctorId, x.CustomerId });
+                    table.PrimaryKey("PK_DoctorsCustomers", x => new { x.DoctorId, x.CustomerId });
                     table.ForeignKey(
-                        name: "FK_DoctorSchedules_AspNetUsers_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DoctorSchedules_Doctors",
+                        name: "FK_DoctorCustomers_Doctors",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DoctorsCustomers_AspNetUsers_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -255,8 +254,8 @@ namespace DentalClinic.DB.Migrations
                 column: "Who");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DoctorSchedules_UsersId",
-                table: "DoctorSchedules",
+                name: "IX_DoctorsCustomers_UsersId",
+                table: "DoctorsCustomers",
                 column: "UsersId");
         }
 
@@ -278,7 +277,7 @@ namespace DentalClinic.DB.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DoctorSchedules");
+                name: "DoctorsCustomers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

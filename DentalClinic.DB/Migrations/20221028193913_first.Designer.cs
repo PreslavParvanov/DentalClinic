@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalClinic.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221027191918_removeWhoInUsers")]
-    partial class removeWhoInUsers
+    [Migration("20221028193913_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace DentalClinic.DB.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorCustomer", b =>
                 {
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
@@ -80,7 +80,7 @@ namespace DentalClinic.DB.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("DoctorSchedules");
+                    b.ToTable("DoctorsCustomers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -327,17 +327,17 @@ namespace DentalClinic.DB.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorCustomer", b =>
                 {
                     b.HasOne("DentalClinic.DB.Data.Models.Doctor", "Doctors")
-                        .WithMany("DoctorSchedules")
+                        .WithMany("DoctorCustomers")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_DoctorSchedules_Doctors");
+                        .HasConstraintName("FK_DoctorCustomers_Doctors");
 
                     b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
-                        .WithMany("DoctorSchedules")
+                        .WithMany("DoctorCustomers")
                         .HasForeignKey("UsersId");
 
                     b.Navigation("Doctors");
@@ -398,12 +398,12 @@ namespace DentalClinic.DB.Migrations
 
             modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
                 {
-                    b.Navigation("DoctorSchedules");
+                    b.Navigation("DoctorCustomers");
                 });
 
             modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
                 {
-                    b.Navigation("DoctorSchedules");
+                    b.Navigation("DoctorCustomers");
 
                     b.Navigation("Doctors");
                 });

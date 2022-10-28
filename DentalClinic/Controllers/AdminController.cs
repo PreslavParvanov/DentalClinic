@@ -14,13 +14,18 @@ namespace DentalClinic.Controllers
     public class AdminController : Controller
     {
         private readonly IDoctorService doctorService;
+        private readonly IDoctorCustomerService doctorCustomerService;
         private readonly IErrorService errorService;
 
 
-        public AdminController(IDoctorService _doctorService, IErrorService _errorService)
+        public AdminController(
+            IDoctorService _doctorService, 
+            IErrorService _errorService,
+            IDoctorCustomerService _doctorCustomerService)
         {
             doctorService = _doctorService;
             errorService = _errorService;
+            doctorCustomerService = _doctorCustomerService;
         }
 
         [HttpGet]
@@ -34,7 +39,7 @@ namespace DentalClinic.Controllers
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             model.Who = userId.ToString();
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return View(model);
             }
@@ -48,6 +53,17 @@ namespace DentalClinic.Controllers
                 return View(model);
             }
             return RedirectToAction(nameof(CreateDentist)); 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateSchedule()
+        {
+            var model = new DoctorCustomerViewModel()
+            {
+                Doctors = await doctorCustomerService.GetDoctorsAsync()
+            };
+            return View(model);
+
         }
     }
 }

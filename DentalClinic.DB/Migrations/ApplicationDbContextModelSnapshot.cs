@@ -57,7 +57,7 @@ namespace DentalClinic.DB.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorCustomer", b =>
                 {
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
@@ -78,7 +78,32 @@ namespace DentalClinic.DB.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("DoctorSchedules");
+                    b.ToTable("DoctorsCustomers");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
+                {
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ScheduleDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsBusy")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Who")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("DoctorId", "ScheduleDateTime");
+
+                    b.HasIndex("Who");
+
+                    b.ToTable("DoctorsSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -325,6 +350,24 @@ namespace DentalClinic.DB.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorCustomer", b =>
+                {
+                    b.HasOne("DentalClinic.DB.Data.Models.Doctor", "Doctors")
+                        .WithMany("DoctorCustomers")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_DoctorCustomers_Doctors");
+
+                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
+                        .WithMany("DoctorCustomers")
+                        .HasForeignKey("UsersId");
+
+                    b.Navigation("Doctors");
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("DentalClinic.DB.Data.Models.DoctorSchedule", b =>
                 {
                     b.HasOne("DentalClinic.DB.Data.Models.Doctor", "Doctors")
@@ -336,7 +379,10 @@ namespace DentalClinic.DB.Migrations
 
                     b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
                         .WithMany("DoctorSchedules")
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("Who")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_DoctorSchedules_Users");
 
                     b.Navigation("Doctors");
 
@@ -396,11 +442,15 @@ namespace DentalClinic.DB.Migrations
 
             modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
                 {
+                    b.Navigation("DoctorCustomers");
+
                     b.Navigation("DoctorSchedules");
                 });
 
             modelBuilder.Entity("DentalClinic.DB.Data.Models.User", b =>
                 {
+                    b.Navigation("DoctorCustomers");
+
                     b.Navigation("DoctorSchedules");
 
                     b.Navigation("Doctors");

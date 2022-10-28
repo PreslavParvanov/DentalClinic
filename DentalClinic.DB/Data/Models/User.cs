@@ -24,9 +24,10 @@ namespace DentalClinic.DB.Data.Models
         public DateTime LastActive { get; set; }
 
         public List<Doctor> Doctors { get; set; } = new List<Doctor>();
+        public List<DoctorCustomer> DoctorCustomers { get; set; } = new List<DoctorCustomer>();
         public List<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
 
-    
+
 
     }
 }

@@ -11,6 +11,7 @@ namespace DentalClinic.DB.Data.Models
     {
         [Key]
         public Guid Id { get; set; }
+        public List<DoctorCustomer> DoctorCustomers { get; set; } = new List<DoctorCustomer>();
         public List<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
 
         [Required]
