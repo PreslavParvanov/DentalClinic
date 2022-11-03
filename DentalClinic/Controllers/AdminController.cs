@@ -1,13 +1,7 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
-using DentalClinic.BL.Service;
-using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace DentalClinic.Controllers
 {

@@ -1,11 +1,5 @@
 ﻿using DentalClinic.DB.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentalClinic.BL.Models
 {
@@ -19,7 +13,7 @@ namespace DentalClinic.BL.Models
         [Required]
         public DateTime DateTimeSchedule { get; set; }
 
-        public string CustomerId { get; set; }
+        public string? CustomerId { get; set; } 
 
         [Required]
         public bool IsBusy { get; set; }    

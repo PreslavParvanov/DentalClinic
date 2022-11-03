@@ -1,6 +1,5 @@
 ﻿using DentalClinic.BL.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DentalClinic.Controllers
 {

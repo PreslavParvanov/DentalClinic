@@ -1,10 +1,5 @@
 ﻿using DentalClinic.DB.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentalClinic.BL.Models
 {
@@ -25,7 +20,7 @@ namespace DentalClinic.BL.Models
 
         [Required]
 
-        public string Who { get; set; }
+        public string Who { get; set; } = null!;
 
     }
 }

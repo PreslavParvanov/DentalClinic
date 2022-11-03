@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -15,19 +10,19 @@ namespace DentalClinic.DB.Data.Models
         public List<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [Required]
-        public string Qualification { get; set; }
+        public string Qualification { get; set; } = null!;
         [Required]
-        public string MoreInfo { get; set; }
+        public string MoreInfo { get; set; } = null!;
 
         [Range(0,1)]
         public byte IsActive { get; set; }
 
         [Required]
-        public string Who { get; set; }
-        public User Users { get; set; }
+        public string Who { get; set; } = null!;
+        public User Users { get; set; } = null!; 
 
         [Required]
         public DateTime When { get; set; }

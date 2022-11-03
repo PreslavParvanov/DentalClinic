@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -19,9 +13,9 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public DateTime DateTime { get; set; }
 
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
 
-        public User Users { get; set; }
+        public User Users { get; set; } = null!;
 
         [Required]
         public bool IsBusy { get; set; }    

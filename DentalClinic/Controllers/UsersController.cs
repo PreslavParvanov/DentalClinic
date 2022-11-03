@@ -1,14 +1,8 @@
-﻿using DentalClinic.BL.Contracts;
-using DentalClinic.BL.Models;
-using DentalClinic.BL.Service;
+﻿using DentalClinic.BL.Models;
 using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DentalClinic.Controllers
 {

@@ -1,11 +1,6 @@
 ﻿using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentalClinic.DB.Data
 {
@@ -63,11 +58,11 @@ namespace DentalClinic.DB.Data
 
         }
 
-        public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<User> Users { get; set; } 
+        public DbSet<Doctor> Doctors { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
 
-        public DbSet<DoctorCustomer> DoctorsCustomers { get; set; }
-        public DbSet<DoctorSchedule> DoctorsSchedules { get; set; }
+        public DbSet<DoctorCustomer> DoctorsCustomers { get; set; } = null!;
+        public DbSet<DoctorSchedule> DoctorsSchedules { get; set; } = null!;
 
     }
 }

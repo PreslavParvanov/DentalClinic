@@ -1,16 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using DentalClinic.BL.Contracts;
+﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
-using DentalClinic.DB.Data.Models;
 using DentalClinic.DB.Common;
+using DentalClinic.DB.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DentalClinic.BL.Service
 {

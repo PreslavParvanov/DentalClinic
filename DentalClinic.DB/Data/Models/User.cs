@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -8,17 +7,17 @@ namespace DentalClinic.DB.Data.Models
     {
 
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
 
         [Required]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = null!;
 
 
         [Range(0, 1)]
         public byte IsActive { get; set; }
 
         [Required]
-        public DateTime When { get; set; }
+        public DateTime When { get; set; } 
 
         [Required]
         public DateTime LastActive { get; set; }

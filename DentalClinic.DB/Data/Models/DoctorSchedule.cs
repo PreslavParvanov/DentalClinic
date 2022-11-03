@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -12,7 +7,7 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public Guid DoctorId { get; set; }
 
-        public Doctor Doctors { get; set; }
+        public Doctor Doctors { get; set; } = null!;
 
         [Required]
         public DateTime ScheduleDateTime { get; set; }
@@ -21,8 +16,8 @@ namespace DentalClinic.DB.Data.Models
         public bool IsBusy { get; set; }
 
         [Required]
-        public string Who { get; set; }
-        public User Users { get; set; }
+        public string Who { get; set; } = null!;
+        public User Users { get; set; } = null!;
 
         [Required]
         public DateTime When { get; set; }
