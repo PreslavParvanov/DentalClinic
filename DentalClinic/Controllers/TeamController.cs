@@ -30,7 +30,7 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public IActionResult Booked()
+        public  IActionResult Booked()
         {
             return View();
         }

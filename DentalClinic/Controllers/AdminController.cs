@@ -35,7 +35,11 @@ namespace DentalClinic.Controllers
         public async Task<IActionResult> CreateDentist(DoctorViewModel model)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            model.Who = userId.ToString();
+            if (userId != null)
+            {
+                model.Who = userId.ToString();
+            }
+            
             if (ModelState.IsValid)
             {
                 return View(model);
@@ -67,7 +71,10 @@ namespace DentalClinic.Controllers
         public async Task<IActionResult> CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            doctorScheduleViewModel.Who = userId.ToString();
+            if (userId != null)
+            {
+                doctorScheduleViewModel.Who = userId.ToString();
+            }
 
             if (ModelState.IsValid)
             {
