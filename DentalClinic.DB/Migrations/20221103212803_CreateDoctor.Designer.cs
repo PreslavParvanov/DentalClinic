@@ -4,6 +4,7 @@ using DentalClinic.DB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalClinic.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221103212803_CreateDoctor")]
+    partial class CreateDoctor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,13 +64,13 @@ namespace DentalClinic.DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3332cc0c-2e9c-45ed-81fb-02cf36ea3ec4"),
+                            Id = new Guid("b944e0bf-5b91-4447-960f-2a32c3ab1073"),
                             IsActive = (byte)1,
                             MoreInfo = "5 Year",
                             Name = "Dr. Radeva",
                             Qualification = "Dentist",
-                            When = new DateTime(2022, 11, 3, 23, 29, 29, 101, DateTimeKind.Local).AddTicks(9680),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                            When = new DateTime(2022, 11, 3, 23, 28, 3, 487, DateTimeKind.Local).AddTicks(3253),
+                            Who = ""
                         });
                 });
 

@@ -1,4 +1,5 @@
-﻿using DentalClinic.DB.Data.Models;
+﻿using DentalClinic.DB.Data.Configuration;
+using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +16,14 @@ namespace DentalClinic.DB.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+            modelBuilder.ApplyConfiguration(new DoctorConfiguration());          
+
             modelBuilder.Entity<Doctor>(entity =>
             {
-                entity.HasOne(m => m.Users)
+                /*entity.HasOne(m => m.Users)
                     .WithMany(g => g.Doctors)
                     .HasForeignKey(m => m.Who)
-                    .HasConstraintName("FK_Doctors_Users");
+                    .HasConstraintName("FK_Doctors_Users");*/
                 
             });
   
