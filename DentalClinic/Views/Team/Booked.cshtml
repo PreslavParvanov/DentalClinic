@@ -1,1 +1,39 @@
-﻿<h1>Booked</h1>
+﻿@model IEnumerable<DoctorScheduleViewModel>
+@{
+    ViewData["Title"] = "Booked";
+}
+<h1>Booked</h1>
+
+<table class="tbl-team">
+    <tbody>
+
+        @{
+            DateTime dateTime = DateTime.Now;
+            foreach (var ds in Model)
+            {
+                <tr>
+                    @{
+                        if (ds.startDate.Date != dateTime)
+                        {
+                            <th scope="col">@ds.startDate.Date.ToString()</th>
+                            dateTime = ds.startDate.Date;
+                        }
+                        <form method="post">
+                    <tr>
+                        <td class="td-team">
+                            <button>@ds.startDate.Hour:@ds.startDate.Minute.ToString()</button>
+                        </td>
+                    </tr>
+                    </form>
+                    }
+                </tr>
+
+            }
+
+        }
+
+        @{
+
+        }
+    </tbody>
+</table>

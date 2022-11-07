@@ -19,8 +19,9 @@ namespace DentalClinic.BL.Models
         public DateTime endDate { get; set; }
 
         [Required]
-
         public string Who { get; set; } = null!;
+
+        public bool IsBusy { get; set; }
 
     }
 }
