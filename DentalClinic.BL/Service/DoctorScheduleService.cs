@@ -1,5 +1,4 @@
-﻿using Arch.EntityFrameworkCore;
-using DentalClinic.BL.Contracts;
+﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data;
@@ -75,6 +74,7 @@ namespace DentalClinic.BL.Service
 
         public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorScheduleAsync()
         {
+            var r = await repo.AllReadonly<Doctor>().ToListAsync();
             var result = await repo.AllReadonly<DoctorSchedule>()
                 .Select(ds => new DoctorScheduleViewModel()
                 {

@@ -27,13 +27,13 @@ namespace DentalClinic.Controllers
         }
 
         [HttpPost]
-        public async void Team(Guid doctor)
+        public async Task<IActionResult> Team(Guid doctor)
         {
-            await Booked(doctor);
+            return RedirectToAction(nameof(Booked));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor)
+        public async Task<IActionResult> Booked()
         {
             var doctorSchedule = await doctorScheduleService.GetDoctorScheduleAsync();
             return View(doctorSchedule);
