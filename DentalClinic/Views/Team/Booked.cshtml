@@ -1,39 +1,36 @@
-﻿@model IEnumerable<DoctorScheduleViewModel>
+﻿@using System.Globalization
+
+@model IEnumerable<DoctorScheduleViewModel>
 @{
     ViewData["Title"] = "Booked";
 }
 <h1>Booked</h1>
-
-<table class="tbl-team">
-    <tbody>
-
+<form method="post">
+    <table class="tbl-team">
         @{
             DateTime dateTime = DateTime.Now;
             foreach (var ds in Model)
             {
-                <tr>
-                    @{
-                        if (ds.startDate.Date != dateTime)
-                        {
-                            <th scope="col">@ds.startDate.Date.ToString()</th>
-                            dateTime = ds.startDate.Date;
-                        }
-                        <form method="post">
+                if (ds.startDate.Date != dateTime)
+                {
                     <tr>
-                        <td class="td-team">
-                            <button>@ds.startDate.Hour:@ds.startDate.Minute.ToString()</button>
-                        </td>
+                        @{
+                            <td scope="col">@ds.startDate.ToString("dd.MM.yyyy")</td>
+                            dateTime = ds.startDate.Date;
+
+                            foreach (var date in Model.Where(x => x.startDate.Date == dateTime))
+                            {
+                                <td class="col">
+                                    <button>@date.startDate.ToString("HH:mm")</button>
+                                </td>
+                            }
+                        }
                     </tr>
-                    </form>
-                    }
-                </tr>
+
+                }
 
             }
-
         }
 
-        @{
-
-        }
-    </tbody>
-</table>
+    </table>
+</form>

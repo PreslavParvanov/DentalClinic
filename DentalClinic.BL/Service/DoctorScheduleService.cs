@@ -16,7 +16,6 @@ namespace DentalClinic.BL.Service
         public DoctorScheduleService(IConfiguration _config)
         {
             config = _config;
-
         }
 
 
