@@ -1,17 +1,18 @@
-﻿using DentalClinic.BL.Contracts;
+﻿using Arch.EntityFrameworkCore;
+using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data;
 using DentalClinic.DB.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace DentalClinic.BL.Service
 {
     public class DoctorScheduleService : IDoctorScheduleService
     {
         private readonly IConfiguration config;
-        private readonly ApplicationDbContext context;
 
         public DoctorScheduleService(IConfiguration _config)
         {
@@ -32,7 +33,6 @@ namespace DentalClinic.BL.Service
             config = _config;
             repo = _repo;
         }
-
 
         public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
         {
@@ -68,7 +68,8 @@ namespace DentalClinic.BL.Service
                     Qualification = d.Qualification,
                     MoreInfo = d.MoreInfo,
                     Who = d.Who
-                }).ToListAsync();
+                })
+                .ToListAsync();
             return result;
         }
 
@@ -79,7 +80,7 @@ namespace DentalClinic.BL.Service
                 {
                     DoctorId = ds.DoctorId,
                     startDate = ds.ScheduleDateTime,
-                    IsBusy = ds.IsBusy,
+                    //IsBusy = ds.IsBusy,
                 }).ToListAsync();
             return result;
         }
