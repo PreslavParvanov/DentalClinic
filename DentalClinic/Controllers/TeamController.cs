@@ -33,7 +33,7 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked()
+        public async Task<IActionResult> Booked(Guid doctor)
         {
             var doctorSchedule = await doctorScheduleService.GetDoctorScheduleAsync();
             return View(doctorSchedule);
