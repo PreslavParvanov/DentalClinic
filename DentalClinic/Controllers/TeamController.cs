@@ -29,14 +29,8 @@ namespace DentalClinic.Controllers
         [HttpPost]
         public async Task<IActionResult> Team(Guid doctor)
         {
-            return RedirectToAction(nameof(Booked));
+            return RedirectToAction("Booked", "Booked", new { doctor = doctor });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor)
-        {
-            var doctorSchedule = await doctorScheduleService.GetDoctorScheduleAsync();
-            return View(doctorSchedule);
-        }
     }
 }

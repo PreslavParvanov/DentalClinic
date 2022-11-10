@@ -72,15 +72,18 @@ namespace DentalClinic.BL.Service
             return result;
         }
 
-        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorScheduleAsync()
+        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorScheduleAsync(Guid doctor)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
+                .Where(ds => ds.DoctorId==doctor)
                 .Select(ds => new DoctorScheduleViewModel()
                 {
                     DoctorId = ds.DoctorId,
                     startDate = ds.ScheduleDateTime,
                     //IsBusy = ds.IsBusy,
-                }).ToListAsync();
+                })
+                .OrderBy(ds => ds.startDate)
+                .ToListAsync();
             return result;
         }
     }
