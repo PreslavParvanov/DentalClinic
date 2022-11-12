@@ -13,11 +13,11 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public DateTime DateTime { get; set; }
 
+        [Required]
         public string CustomerId { get; set; } = null!;
 
-        public User Users { get; set; } = null!;
-
         [Required]
-        public bool IsBusy { get; set; }    
+        public DateTime When { get; set; }
+
     }
 }

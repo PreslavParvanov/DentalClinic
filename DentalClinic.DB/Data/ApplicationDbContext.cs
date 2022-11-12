@@ -30,7 +30,7 @@ namespace DentalClinic.DB.Data
 
             modelBuilder.Entity<DoctorCustomer>(entity =>
             {
-                entity.HasKey(dc => new { dc.DoctorId, dc.CustomerId });
+                entity.HasKey(dc => new { dc.DoctorId, dc.CustomerId, dc.DateTime });
 
                 entity.HasOne(d => d.Doctors)
                     .WithMany(dc => dc.DoctorCustomers)

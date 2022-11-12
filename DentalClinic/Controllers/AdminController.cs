@@ -8,21 +8,15 @@ namespace DentalClinic.Controllers
     public class AdminController : Controller
     {
         private readonly IDoctorService doctorService;
-        private readonly IDoctorCustomerService doctorCustomerService;
-        private readonly IDoctorScheduleService doctorScheduleService;
         private readonly IErrorService errorService;
 
 
         public AdminController(
             IDoctorService _doctorService, 
-            IErrorService _errorService,
-            IDoctorCustomerService _doctorCustomerService,
-            IDoctorScheduleService _doctorScheduleService)
+            IErrorService _errorService)
         {
             doctorService = _doctorService;
             errorService = _errorService;
-            doctorCustomerService = _doctorCustomerService;
-            doctorScheduleService = _doctorScheduleService;
         }
 
         [HttpGet]
@@ -61,7 +55,7 @@ namespace DentalClinic.Controllers
         {
             var model = new DoctorScheduleViewModel()
             {
-                Doctors = await doctorScheduleService.GetDoctorsAsync()
+                Doctors = await doctorService.GetDoctorsAsync()
             };
             return View(model);
 
@@ -85,7 +79,7 @@ namespace DentalClinic.Controllers
                 ModelState.AddModelError("", "endDate is < or = on startDate!");
                 return View(doctorScheduleViewModel);
             }
-            await doctorScheduleService.CreateSchedule(doctorScheduleViewModel);
+            await doctorService.CreateSchedule(doctorScheduleViewModel);
             return RedirectToAction(nameof(CreateSchedule));
         }
     }

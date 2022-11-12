@@ -7,6 +7,7 @@
 <h1>Booked</h1>
 <form method="post">
     <table class="tbl-team">
+
         @{
             DateTime dateTime = DateTime.Now;
             foreach (var ds in Model)
@@ -21,7 +22,19 @@
                             foreach (var date in Model.Where(x => x.startDate.Date == dateTime))
                             {
                                 <td class="col">
-                                    <button>@date.startDate.ToString("HH:mm")</button>
+                                    <input asp-for="@date.DoctorId" type="text" name="DoctorId" placeholder="DoctorId" required hidden />
+                                    <input asp-for="@date.Doctors" type="text" name="Doctors" placeholder="Doctors" required hidden />
+                                    <input asp-for="@date.startDate" type="text" name="startDate" placeholder="startDate" required hidden />
+                                    @{
+                                        if (@date.IsBusy == true)
+                                        {
+                                            <button class="ds-booked">@date.startDate.ToString("HH:mm")</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="ds-free">@date.startDate.ToString("HH:mm")</button>
+                                        }
+                                    }
                                 </td>
                             }
                         }

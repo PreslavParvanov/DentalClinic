@@ -25,8 +25,6 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IErrorService, ErrorService>();
-builder.Services.AddScoped<IDoctorCustomerService, DoctorCustomerService>();
-builder.Services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
 
 var app = builder.Build();
 
