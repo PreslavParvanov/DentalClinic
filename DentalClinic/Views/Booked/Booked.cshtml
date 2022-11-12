@@ -5,7 +5,7 @@
     ViewData["Title"] = "Booked";
 }
 <h1>Booked</h1>
-<form method="post">
+
     <table class="tbl-team">
 
         @{
@@ -14,7 +14,7 @@
             {
                 if (ds.startDate.Date != dateTime)
                 {
-                    <tr>
+                <tr class="booked-tr">
                         @{
                             <td scope="col">@ds.startDate.ToString("dd.MM.yyyy")</td>
                             dateTime = ds.startDate.Date;
@@ -22,19 +22,21 @@
                             foreach (var date in Model.Where(x => x.startDate.Date == dateTime))
                             {
                                 <td class="col">
+                                <form method="post">
                                     <input asp-for="@date.DoctorId" type="text" name="DoctorId" placeholder="DoctorId" required hidden />
                                     <input asp-for="@date.Doctors" type="text" name="Doctors" placeholder="Doctors" required hidden />
                                     <input asp-for="@date.startDate" type="text" name="startDate" placeholder="startDate" required hidden />
                                     @{
                                         if (@date.IsBusy == true)
                                         {
-                                            <button class="ds-booked">@date.startDate.ToString("HH:mm")</button>
+                                            <button class="ds-booked" disabled>@date.startDate.ToString("HH:mm")</button>
                                         }
                                         else
                                         {
                                             <button class="ds-free">@date.startDate.ToString("HH:mm")</button>
                                         }
                                     }
+                                </form>
                                 </td>
                             }
                         }
@@ -46,4 +48,3 @@
         }
 
     </table>
-</form>
