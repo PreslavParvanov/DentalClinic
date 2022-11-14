@@ -30,7 +30,10 @@ namespace DentalClinic.BL.Service
             config = _config;
             repo = _repo;
         }
-
+        /// <summary>
+        /// Get all active doctors
+        /// </summary>
+        /// <returns>ToList whit GetDoctorViewModel</returns>
         public async Task<IEnumerable<GetDoctorViewModel>> GetAll()
         {      
                 var result = await repo.AllReadonly<Doctor>()
@@ -46,6 +49,11 @@ namespace DentalClinic.BL.Service
             return result;
         }
 
+        /// <summary>
+        /// Create doctor
+        /// </summary>
+        /// <param name="doctorViewModel"></param>
+        /// <returns></returns>
         public async Task Create(DoctorViewModel doctorViewModel)
         {
             var doctor = new Doctor()
@@ -62,6 +70,11 @@ namespace DentalClinic.BL.Service
             await repo.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns>ToList whit GetDoctorViewModel</returns>
         public async Task<IEnumerable<GetDoctorViewModel>> GetDoctorById(Guid doctorId)
         {
             var result = await repo.AllReadonly<Doctor>()
@@ -77,7 +90,12 @@ namespace DentalClinic.BL.Service
 
             return result;
         }
-
+        /// <summary>
+        /// Мethod that lists the doctor's schedule to date 
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="dateSearch"></param>
+        /// <returns>ToList whit DoctorScheduleViewModel</returns>
         public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateSearch)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
@@ -94,7 +112,11 @@ namespace DentalClinic.BL.Service
                 .ToListAsync();
             return result;
         }
-
+        /// <summary>
+        /// Booked examination by a doctor
+        /// </summary>
+        /// <param name="doctorScheduleViewModel"></param>
+        /// <returns></returns>
         public async Task Booked(DoctorScheduleViewModel doctorScheduleViewModel)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
@@ -134,6 +156,12 @@ namespace DentalClinic.BL.Service
                 .ToListAsync();
             return result;
         }
+
+        /// <summary>
+        /// Create chedules by date
+        /// </summary>
+        /// <param name="doctorScheduleViewModel"></param>
+        /// <returns></returns>
 
         public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
         {
