@@ -170,6 +170,7 @@ namespace DentalClinic.BL.Service
 
             while (endDate > currentDateTime)
             {
+                
                 var doctorSchedule = new DoctorSchedule()
                 {
                     DoctorId = doctorScheduleViewModel.DoctorId,
@@ -177,12 +178,20 @@ namespace DentalClinic.BL.Service
                     Who = doctorScheduleViewModel.Who,
                     When = DateTime.Now,
                     IsBusy = false,
-
                 };
                 await repo.AddAsync(doctorSchedule);
                 await repo.SaveChangesAsync();
 
                 currentDateTime = currentDateTime.AddMinutes(30);
+                //If the hour is greater than 19:30 pm, it sets the date of the next day at 09:00 am.
+                if (currentDateTime.Hour > 19)
+                {
+                    currentDateTime = currentDateTime.AddDays(1);
+                    DateTime dateTime = currentDateTime.Date;
+                    TimeSpan timeSpan = new TimeSpan(09, 00, 0);
+                    dateTime = dateTime.Date + timeSpan;
+                    currentDateTime = dateTime;
+                }
             }
         }
     }
