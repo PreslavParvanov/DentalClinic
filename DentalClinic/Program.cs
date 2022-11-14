@@ -22,9 +22,10 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IDoctorService, DentalClinic.BL.Service.DoctorService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IErrorService, ErrorService>();
+builder.Services.AddScoped<IDentalService, DentalSrvService>();
 
 var app = builder.Build();
 

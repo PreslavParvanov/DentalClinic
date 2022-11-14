@@ -1,0 +1,17 @@
+﻿@model  IEnumerable<DentalServiceViewModel>
+@{
+    ViewData["Title"] = "Dental Services";
+}
+<div class="dental-services-logo">
+    <img class="home-img" src=".../img/Home.png" />
+</div>
+
+<h1 class="dental-services">Dental Service</h1>
+
+@{
+    foreach (var dentalService in Model)
+    {
+        <p>@dentalService.ServiceName</p>
+    }
+}
+

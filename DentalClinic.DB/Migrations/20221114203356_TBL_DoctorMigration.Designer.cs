@@ -4,6 +4,7 @@ using DentalClinic.DB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalClinic.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221114203356_TBL_DoctorMigration")]
+    partial class TBL_DoctorMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,136 +23,6 @@ namespace DentalClinic.DB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.DentalService", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ServiceDescription")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("When")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Who")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("DentalServices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c386d6ef-4b35-4cca-b15d-84def33d658b"),
-                            ServiceDescription = "",
-                            ServiceName = "Surgical operations",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5949),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("1d15ef53-e1e3-4702-a83f-8f3b91622143"),
-                            ServiceDescription = "",
-                            ServiceName = "Dental implants",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5966),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("4c636d97-c4a0-4728-a6f0-885633414d41"),
-                            ServiceDescription = "",
-                            ServiceName = "Complete changeover",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5970),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("f09d7f1a-9164-4ab0-adf2-8965669e54a8"),
-                            ServiceDescription = "",
-                            ServiceName = "Aesthetic fillings",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5973),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("6814ebd4-de66-4ab4-ad15-40b5f322be09"),
-                            ServiceDescription = "",
-                            ServiceName = "Veneers",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5976),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("b845dc58-8fda-497b-b912-fc0413f0aa97"),
-                            ServiceDescription = "",
-                            ServiceName = "Ceramic inlays",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5981),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("8f7a4350-8676-4d71-8b5e-a9a9d07e1027"),
-                            ServiceDescription = "",
-                            ServiceName = "Crowns and bridges",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5983),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("3e8a0b33-7fef-4d90-b845-d5d0ad47186d"),
-                            ServiceDescription = "",
-                            ServiceName = "Tooth extraction",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5986),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("6b50eb83-55ca-4a8a-b267-9c27d19f6f88"),
-                            ServiceDescription = "",
-                            ServiceName = "Prosthesis",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5989),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("61647aac-aa97-44a3-873a-e06be215c175"),
-                            ServiceDescription = "",
-                            ServiceName = "Orthodontic treatment/braces and splints",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5995),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("17115c05-2580-483f-a19f-0b5a45c33472"),
-                            ServiceDescription = "",
-                            ServiceName = "Teeth whitening",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5998),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        },
-                        new
-                        {
-                            Id = new Guid("ce7cd604-626f-4812-bcb0-a5df7ef146d2"),
-                            ServiceDescription = "",
-                            ServiceName = "Glass supports",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(6001),
-                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
-                        });
-                });
 
             modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
                 {
@@ -192,22 +64,22 @@ namespace DentalClinic.DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7b8e51ac-e88d-4349-bcf7-7ab0ea6dd5e3"),
+                            Id = new Guid("bdccca37-dd21-4260-80e5-8e5d91bca413"),
                             IsActive = (byte)1,
                             MoreInfo = "Doctor Radeva has 5 years of experience as a dentist.",
                             Name = "Dr. Radeva",
                             Qualification = "Dentist",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5823),
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2473),
                             Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
                         },
                         new
                         {
-                            Id = new Guid("cf0147ec-873d-44c0-ad8f-726043102e1b"),
+                            Id = new Guid("ea730c66-e2d1-4493-b649-8340b0f23fc8"),
                             IsActive = (byte)1,
                             MoreInfo = "Doctor Valeva has 3 years of experience as a оrthodontist.",
                             Name = "Dr. Valeva",
                             Qualification = "Оrthodontist",
-                            When = new DateTime(2022, 11, 14, 22, 58, 41, 375, DateTimeKind.Local).AddTicks(5859),
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2511),
                             Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
                         });
                 });
@@ -259,6 +131,136 @@ namespace DentalClinic.DB.Migrations
                     b.HasIndex("Who");
 
                     b.ToTable("DoctorsSchedules");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.Service", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ServiceDescription")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Who")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d26809dc-d9de-466e-8f78-91dde69c34ec"),
+                            ServiceDescription = "",
+                            ServiceName = "Surgical operations",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2597),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("05134afe-38a8-4c7a-98fe-09a7235eb0ab"),
+                            ServiceDescription = "",
+                            ServiceName = "Dental implants",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2604),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("e8f47c99-1b40-4390-bd1a-3351d3d8227b"),
+                            ServiceDescription = "",
+                            ServiceName = "Complete changeover",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2607),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("38e0af51-1899-465c-b1f8-7d3cc96f6168"),
+                            ServiceDescription = "",
+                            ServiceName = "Aesthetic fillings",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2610),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("7f1eaf6e-6884-4937-b8bd-9078a84a6675"),
+                            ServiceDescription = "",
+                            ServiceName = "Veneers",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2622),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("e64ef0d7-d3ff-4614-bf20-c8665a7a01e3"),
+                            ServiceDescription = "",
+                            ServiceName = "Ceramic inlays",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2628),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("1e83fc08-467a-4e74-8726-8d575c602447"),
+                            ServiceDescription = "",
+                            ServiceName = "Crowns and bridges",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2631),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("663555d5-c31c-40f5-8204-df8fa410dd6e"),
+                            ServiceDescription = "",
+                            ServiceName = "Tooth extraction",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2634),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("0a57c574-254a-4fc9-9d23-01a5c615b858"),
+                            ServiceDescription = "",
+                            ServiceName = "Prosthesis",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2637),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("d02bdaa0-57cf-497a-97d1-81e7c9ae2e59"),
+                            ServiceDescription = "",
+                            ServiceName = "Orthodontic treatment/braces and splints",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2640),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("66e67adc-80cc-48ce-bcda-fc86f9d9f662"),
+                            ServiceDescription = "",
+                            ServiceName = "Teeth whitening",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2643),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        },
+                        new
+                        {
+                            Id = new Guid("5426f105-a27a-450e-b2a8-bb8581f42eb7"),
+                            ServiceDescription = "",
+                            ServiceName = "Glass supports",
+                            When = new DateTime(2022, 11, 14, 22, 33, 55, 713, DateTimeKind.Local).AddTicks(2645),
+                            Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -493,15 +495,6 @@ namespace DentalClinic.DB.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("DentalClinic.DB.Data.Models.DentalService", b =>
-                {
-                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("UsersId");
-
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("DentalClinic.DB.Data.Models.Doctor", b =>
                 {
                     b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
@@ -544,6 +537,15 @@ namespace DentalClinic.DB.Migrations
                         .HasConstraintName("FK_DoctorSchedules_Users");
 
                     b.Navigation("Doctors");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("DentalClinic.DB.Data.Models.Service", b =>
+                {
+                    b.HasOne("DentalClinic.DB.Data.Models.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("UsersId");
 
                     b.Navigation("Users");
                 });

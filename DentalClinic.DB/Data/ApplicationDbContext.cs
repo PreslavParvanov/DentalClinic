@@ -16,7 +16,8 @@ namespace DentalClinic.DB.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new DoctorConfiguration());          
+            modelBuilder.ApplyConfiguration(new DoctorConfiguration());
+            modelBuilder.ApplyConfiguration(new DentalServiceConfiguration());
 
             modelBuilder.Entity<Doctor>(entity =>
             {
@@ -65,6 +66,7 @@ namespace DentalClinic.DB.Data
 
         public DbSet<DoctorCustomer> DoctorsCustomers { get; set; } = null!;
         public DbSet<DoctorSchedule> DoctorsSchedules { get; set; } = null!;
+        public DbSet<DentalService> DentalServices { get; set; } = null!;
 
     }
 }
