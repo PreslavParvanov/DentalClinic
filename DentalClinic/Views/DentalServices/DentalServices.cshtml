@@ -6,12 +6,15 @@
     <img class="home-img" src=".../img/Home.png" />
 </div>
 
-<h1 class="dental-services">Dental Service</h1>
+<h1 class="dental-service-h1">Dental Service</h1>
 
 @{
     foreach (var dentalService in Model)
     {
-        <p>@dentalService.ServiceName</p>
+        <details class="dental-dervice-details">
+            <summary class="dental-dervice-summary">@dentalService.ServiceName</summary>
+            @dentalService.ServiceDescription
+        </details>
     }
 }
 
