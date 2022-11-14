@@ -21,9 +21,14 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor)
+        public async Task<IActionResult> Booked(Guid doctor, DateTime dateSearch)
         {
-            var doctorSchedule = await doctorService.GetDoctorSchedule(doctor);
+            
+            if (dateSearch < DateTime.Now)
+            {
+                dateSearch=DateTime.Now;
+            }
+            var doctorSchedule = await doctorService.GetDoctorSchedule(doctor, dateSearch);
             return View(doctorSchedule);
         }
 
@@ -42,6 +47,7 @@ namespace DentalClinic.Controllers
             {
                 return View(model);
             }
+            
             await doctorService.Booked(model);
             return RedirectToAction("Index", "Home");
         }

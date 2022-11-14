@@ -78,10 +78,12 @@ namespace DentalClinic.BL.Service
             return result;
         }
 
-        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor)
+        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateSearch)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
-                .Where(ds => ds.DoctorId == doctor)
+                .Where(ds => ds.DoctorId == doctor 
+                    && ds.ScheduleDateTime >= dateSearch
+                    && ds.ScheduleDateTime <= dateSearch.AddDays(5))
                 .Select(ds => new DoctorScheduleViewModel()
                 {
                     DoctorId = ds.DoctorId,
@@ -96,7 +98,8 @@ namespace DentalClinic.BL.Service
         public async Task Booked(DoctorScheduleViewModel doctorScheduleViewModel)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
-            .Where(ds => ds.DoctorId == doctorScheduleViewModel.DoctorId && ds.ScheduleDateTime== doctorScheduleViewModel.startDate)
+            .Where(ds => ds.DoctorId == doctorScheduleViewModel.DoctorId 
+                && ds.ScheduleDateTime== doctorScheduleViewModel.startDate)
             .FirstOrDefaultAsync();
 
 
