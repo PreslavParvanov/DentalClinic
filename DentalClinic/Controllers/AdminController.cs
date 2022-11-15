@@ -62,7 +62,7 @@ namespace DentalClinic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
+        public async Task<IActionResult> CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userId != null)
@@ -76,10 +76,15 @@ namespace DentalClinic.Controllers
             }
             if (doctorScheduleViewModel.endDate<= doctorScheduleViewModel.startDate)
             {
-                ModelState.AddModelError("", "endDate is < or = on startDate!");
+                ModelState.AddModelError("", "end Date is < or = on start Date!");
                 return View(doctorScheduleViewModel);
             }
-            await doctorService.CreateSchedule(doctorScheduleViewModel);
+            if (endTime <= startTime)
+            {
+                ModelState.AddModelError("", "end Time is < or = on start Time!");
+                return View(doctorScheduleViewModel);
+            }
+            await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
             return RedirectToAction(nameof(CreateSchedule));
         }
     }

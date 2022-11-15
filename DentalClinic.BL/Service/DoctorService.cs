@@ -163,14 +163,13 @@ namespace DentalClinic.BL.Service
         /// <param name="doctorScheduleViewModel"></param>
         /// <returns></returns>
 
-        public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel)
+        public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime)
         {
-            DateTime currentDateTime = doctorScheduleViewModel.startDate;
-            DateTime endDate = doctorScheduleViewModel.endDate;
+            DateTime currentDateTime = doctorScheduleViewModel.startDate+startTime;
+            DateTime endDate = doctorScheduleViewModel.endDate+ endTime;
 
             while (endDate > currentDateTime)
-            {
-                
+            { 
                 var doctorSchedule = new DoctorSchedule()
                 {
                     DoctorId = doctorScheduleViewModel.DoctorId,
@@ -183,14 +182,10 @@ namespace DentalClinic.BL.Service
                 await repo.SaveChangesAsync();
 
                 currentDateTime = currentDateTime.AddMinutes(30);
-                //If the hour is greater than 19:30 pm, it sets the date of the next day at 09:00 am.
-                if (currentDateTime.Hour > 19)
+                //If the hour is greater than endTime, it sets the date of the next day at startTime.
+                if (currentDateTime > (currentDateTime.Date+endTime))
                 {
-                    currentDateTime = currentDateTime.AddDays(1);
-                    DateTime dateTime = currentDateTime.Date;
-                    TimeSpan timeSpan = new TimeSpan(09, 00, 0);
-                    dateTime = dateTime.Date + timeSpan;
-                    currentDateTime = dateTime;
+                    currentDateTime = currentDateTime.AddDays(1).Date + startTime;
                 }
             }
         }
