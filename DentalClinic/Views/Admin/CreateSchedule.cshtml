@@ -17,6 +17,31 @@
         <input asp-for="@Model.endDate" type="datetime-local" id="endDate" name="endDate">
     </div>
     <span asp-validation-for="@Model.endDate" class="small text-danger"></span>
+    @{
+        List<TimeSpan> timeSpans = new List<TimeSpan>()
+    {
+    new TimeSpan(09,00,00), new TimeSpan(09,30,00), new TimeSpan(10,00,00), new TimeSpan(10,30,00),
+    new TimeSpan(11,00,00), new TimeSpan(11,30,00), new TimeSpan(12,00,00), new TimeSpan(12,30,00),
+    new TimeSpan(13,00,00), new TimeSpan(13,30,00), new TimeSpan(14,00,00), new TimeSpan(14,30,00),
+    new TimeSpan(15,00,00), new TimeSpan(15,30,00), new TimeSpan(16,00,00), new TimeSpan(16,30,00),
+    new TimeSpan(17,00,00), new TimeSpan(17,30,00), new TimeSpan(18,00,00), new TimeSpan(18,30,00),
+    new TimeSpan(19,00,00)
+    };
+        <div class="time">
+            <select class="start-time">
+                @foreach (var time in timeSpans)
+                {
+                    <option value="@time">@time.ToString(@"hh\:mm")</option>
+                }
+            </select>
+            <select class="end-time">
+                @foreach (var time in timeSpans)
+                {
+                    <option value="@time">@time.ToString(@"hh\:mm")</option>
+                }
+            </select>
+        </div>
+    }
     <div class="form-field">
         <button class="btn" type="submit">Save</button>
     </div>
