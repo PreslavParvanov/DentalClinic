@@ -12,12 +12,10 @@ namespace DentalClinic.BL.Models
 
         [Required]
         [Range(typeof(DateTime), "01/01/2022", "01/01/2100", ErrorMessage = "Date is out of Range")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime startDate { get; set; }
 
         [Required]
         [Range(typeof(DateTime), "01/01/2022", "01/01/2100", ErrorMessage = "Date is out of Range")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime endDate { get; set; }
 
         [Required]

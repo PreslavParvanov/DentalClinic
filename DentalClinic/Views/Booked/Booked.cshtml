@@ -16,7 +16,8 @@
                 {
                 <tr class="booked-tr">
                         @{
-                            <td scope="col">@ds.startDate.ToString("dd.MM.yyyy")</td>
+                        //
+                        <td scope="col">@ds.startDate.ToString("dd.MM.yyyy") @ds.startDate.DayOfWeek </td>
                             dateTime = ds.startDate.Date;
 
                             foreach (var date in Model.Where(x => x.startDate.Date == dateTime))
