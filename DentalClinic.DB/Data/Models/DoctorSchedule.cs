@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -6,7 +8,6 @@ namespace DentalClinic.DB.Data.Models
     {
         [Required]
         public Guid DoctorId { get; set; }
-
         public Doctor Doctors { get; set; } = null!;
 
         [Required]
@@ -17,7 +18,9 @@ namespace DentalClinic.DB.Data.Models
 
         [Required]
         public string Who { get; set; } = null!;
-        public User Users { get; set; } = null!;
+        
+        [ForeignKey(nameof(Who))]
+        public IdentityUser User { get; set; } = null!;
 
         [Required]
         public DateTime When { get; set; }

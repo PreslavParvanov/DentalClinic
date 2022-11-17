@@ -18,15 +18,6 @@ namespace DentalClinic.DB.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new DoctorConfiguration());
             modelBuilder.ApplyConfiguration(new DentalServiceConfiguration());
-
-            modelBuilder.Entity<Doctor>(entity =>
-            {
-                /*entity.HasOne(m => m.Users)
-                    .WithMany(g => g.Doctors)
-                    .HasForeignKey(m => m.Who)
-                    .HasConstraintName("FK_Doctors_Users");*/
-                
-            });
   
 
             modelBuilder.Entity<DoctorCustomer>(entity =>
@@ -37,11 +28,6 @@ namespace DentalClinic.DB.Data
                     .WithMany(dc => dc.DoctorCustomers)
                     .HasForeignKey(d => d.DoctorId)
                     .HasConstraintName("FK_DoctorCustomers_Doctors");
-
-                /*entity.HasOne(u => u.Users)
-                    .WithMany(g => g.DoctorSchedules)
-                    .HasForeignKey(c => c.CustomerId)
-                    .HasConstraintName("FK_DoctorSchedules_Users");*/
             });
 
             modelBuilder.Entity<DoctorSchedule>(entity =>
@@ -52,18 +38,11 @@ namespace DentalClinic.DB.Data
                     .WithMany(ds => ds.DoctorSchedules)
                     .HasForeignKey(d => d.DoctorId)
                     .HasConstraintName("FK_DoctorSchedules_Doctors");
-
-                entity.HasOne(u => u.Users)
-                    .WithMany(g => g.DoctorSchedules)
-                    .HasForeignKey(c => c.Who)
-                    .HasConstraintName("FK_DoctorSchedules_Users");
             });
 
         }
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
-        public DbSet<User> Users { get; set; } = null!;
-
         public DbSet<DoctorCustomer> DoctorsCustomers { get; set; } = null!;
         public DbSet<DoctorSchedule> DoctorsSchedules { get; set; } = null!;
         public DbSet<DentalService> DentalServices { get; set; } = null!;

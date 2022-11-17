@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DentalClinic.DB.Data.Models
 {
@@ -15,6 +17,8 @@ namespace DentalClinic.DB.Data.Models
 
         [Required]
         public string CustomerId { get; set; } = null!;
+
+        public IdentityUser User { get; set; } = null!;
 
         [Required]
         public DateTime When { get; set; }
