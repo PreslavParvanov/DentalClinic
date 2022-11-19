@@ -3,8 +3,9 @@
     ViewData["Title"] = "Report Dentists";
 }
 <h1 class="text-center">Report Dentists</h1>
-<div >
-    <p>Date - @DateTime.Now</p>
+<div class="text-left">
+    <p>Criteria:</p>
+    <p>        -> Dentist: @ViewBag.Doctor</p>
 </div>
 <table class="table table-striped">
     <thead>
@@ -36,3 +37,6 @@
         }
     }
 </table>
+<div>
+    <p>Report date: @DateTime.Now</p>
+</div>

@@ -1,5 +1,6 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
+using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,7 @@ namespace DentalClinic.Controllers
         public async  Task<IActionResult> Dentists()
         {
             var result = await reportService.GetAllDentists();
+            ViewBag.Doctor = "All";
             return View(result);
         }
 
