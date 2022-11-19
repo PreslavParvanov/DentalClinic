@@ -1,26 +1,28 @@
 ﻿using DentalClinic.BL.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DentalClinic.Controllers
 {
     public class ReportController : Controller
     {
         //Dentist
-        private readonly IDoctorService doctorService;
+        private readonly IReportService reportService;
         private readonly IErrorService errorService;
 
 
         public ReportController(
-            IDoctorService _doctorService,
+            IReportService _reportService,
             IErrorService _errorService)
         {
-            doctorService = _doctorService;
+            reportService = _reportService;
             errorService = _errorService;
         }
 
         [HttpGet]
-        public IActionResult CreateDentist()
+        public IActionResult Dentists()
         {
+            var result = reportService.GetAllDentists();
             return View();
         }
     }

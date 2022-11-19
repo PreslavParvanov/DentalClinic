@@ -26,6 +26,7 @@ builder.Services.AddScoped<IDoctorService, DentalClinic.BL.Service.DoctorService
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IErrorService, ErrorService>();
 builder.Services.AddScoped<IDentalService, DentalSrvService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 
 var app = builder.Build();
 
