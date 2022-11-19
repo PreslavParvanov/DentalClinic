@@ -1,6 +1,7 @@
 ﻿using DentalClinic.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace DentalClinic.Controllers
 {
@@ -15,6 +16,8 @@ namespace DentalClinic.Controllers
 
         public IActionResult Index()
         {
+            var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            ViewBag.UserName = userName;
             return View();
         }
 
