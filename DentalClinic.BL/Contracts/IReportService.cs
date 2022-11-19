@@ -5,6 +5,6 @@ namespace DentalClinic.BL.Contracts
 {
     public interface IReportService
     {
-        Task<IEnumerable<GetDoctorViewModel>> GetAllDentists();
+        Task<IEnumerable<ReportDoctorViewModel>> GetAllDentists();
     }
 }

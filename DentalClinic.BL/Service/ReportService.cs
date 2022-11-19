@@ -33,16 +33,17 @@ namespace DentalClinic.BL.Service
         /// <summary>
         /// Get all doctors
         /// </summary>
-        /// <returns>ToList whit GetDoctorViewModel</returns>
+        /// <returns>ToList whit ReportDoctorViewModel</returns>
 
-        public async Task<IEnumerable<GetDoctorViewModel>> GetAllDentists()
+        public async Task<IEnumerable<ReportDoctorViewModel>> GetAllDentists()
         {
             var result = await repo.AllReadonly<Doctor>()
-                .Select(d => new GetDoctorViewModel()
+                .Select(d => new ReportDoctorViewModel()
                 {
                     Name = d.Name,
                     Qualification = d.Qualification,
-                    MoreInfo = d.MoreInfo
+                    MoreInfo = d.MoreInfo,
+                    IsActive = d.IsActive
                 })
                 .OrderBy(d => d.Name)
                 .ToListAsync();

@@ -20,10 +20,10 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dentists()
+        public async  Task<IActionResult> Dentists()
         {
-            var result = reportService.GetAllDentists();
-            return View();
+            var result = await reportService.GetAllDentists();
+            return View(result);
         }
     }
 }
