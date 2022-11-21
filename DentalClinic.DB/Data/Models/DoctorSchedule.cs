@@ -19,8 +19,7 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public string Who { get; set; } = null!;
         
-        [ForeignKey(nameof(Who))]
-        public IdentityUser User { get; set; } = null!;
+        public IdentityUser Users { get; set; } = null!;
 
         [Required]
         public DateTime When { get; set; }
