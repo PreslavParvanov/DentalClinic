@@ -96,12 +96,12 @@ namespace DentalClinic.BL.Service
         /// <param name="doctor"></param>
         /// <param name="dateSearch"></param>
         /// <returns>ToList whit DoctorScheduleViewModel</returns>
-        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateSearch)
+        public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateStart, DateTime dateEnd)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
                 .Where(ds => ds.DoctorId == doctor 
-                    && ds.ScheduleDateTime >= dateSearch
-                    && ds.ScheduleDateTime <= dateSearch.AddDays(5))
+                    && ds.ScheduleDateTime >= dateStart
+                    && ds.ScheduleDateTime <= dateEnd)
                 .Select(ds => new DoctorScheduleViewModel()
                 {
                     DoctorId = ds.DoctorId,

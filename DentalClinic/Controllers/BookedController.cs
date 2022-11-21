@@ -21,14 +21,15 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor, DateTime dateSearch)
+        public async Task<IActionResult> Booked(Guid doctor, DateTime dateStart, DateTime dateEnd)
         {
             
-            if (dateSearch < DateTime.Now)
+            if (dateStart < DateTime.Now)
             {
-                dateSearch=DateTime.Now;
+                dateStart = DateTime.Now;
+                dateEnd = DateTime.Now.AddDays(5);
             }
-            var doctorSchedule = await doctorService.GetDoctorSchedule(doctor, dateSearch);
+            var doctorSchedule = await doctorService.GetDoctorSchedule(doctor, dateStart, dateEnd);
             return View(doctorSchedule);
         }
 

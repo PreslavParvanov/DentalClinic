@@ -8,7 +8,7 @@ namespace DentalClinic.BL.Contracts
         Task Create(DoctorViewModel doctorViewModel);
         Task<IEnumerable<GetDoctorViewModel>> GetDoctorById(Guid doctorId);
         Task<IEnumerable<GetDoctorViewModel>> GetAll();
-        Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateSearch);
+        Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateStart, DateTime dateEnd);
         Task Booked(DoctorScheduleViewModel doctorScheduleViewModel);
         Task<IEnumerable<Doctor>> GetDoctorsAsync();
         Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime);

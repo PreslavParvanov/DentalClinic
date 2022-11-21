@@ -1,5 +1,6 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
+using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -83,20 +84,35 @@ namespace DentalClinic.Controllers
 
             if (ModelState.IsValid)
             {
+                doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
                 return View(doctorScheduleViewModel);
             }
             if (doctorScheduleViewModel.endDate<= doctorScheduleViewModel.startDate)
             {
                 ModelState.AddModelError("", "end Date is < or = on start Date!");
+                doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
                 return View(doctorScheduleViewModel);
             }
             if (endTime <= startTime)
             {
                 ModelState.AddModelError("", "end Time is < or = on start Time!");
+                doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
                 return View(doctorScheduleViewModel);
             }
-            await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
-            return RedirectToAction(nameof(CreateSchedule));
+            var result = await doctorService.GetDoctorSchedule(doctorScheduleViewModel.DoctorId, doctorScheduleViewModel.startDate, doctorScheduleViewModel.endDate);
+            if (result==null)
+            {
+                await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
+                return RedirectToAction(nameof(CreateSchedule));
+            }
+            else
+            {
+                ModelState.AddModelError("", $"The doctor has a schedule from {startTime} to {endTime}!");
+                doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
+                return View(doctorScheduleViewModel);
+            }
+            
+            
         }
     }
 }

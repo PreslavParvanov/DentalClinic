@@ -1,6 +1,7 @@
 ﻿@model DoctorScheduleViewModel
 
 <form class="create-dentist-schedule-form" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-field">
         <select asp-for="@Model.DoctorId" class="form-control">
             @foreach (var doctor in Model.Doctors)
