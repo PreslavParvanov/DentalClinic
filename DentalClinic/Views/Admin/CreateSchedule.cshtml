@@ -1,6 +1,6 @@
 ﻿@model DoctorScheduleViewModel
 
-<form class="create-dentist-form" method="post">
+<form class="create-dentist-schedule-form" method="post">
     <div class="form-field">
         <select asp-for="@Model.DoctorId" class="form-control">
             @foreach (var doctor in Model.Doctors)
@@ -9,14 +9,15 @@
             }
         </select>
     </div>
-    <div class="form-field">
-        <input asp-for="@Model.startDate" type="date-local" id="startDate" name="startDate">
+    <div class="create-dentist-schedule-field">
+        <input asp-for="@Model.startDate" type="date" id="startDate" name="startDate">
     </div>
     <span asp-validation-for="@Model.startDate" class="small text-danger"></span>
-    <div class="form-field">
-        <input asp-for="@Model.endDate" type="date-local" id="endDate" name="endDate">
+    <div class="create-dentist-schedule-field">
+        <input asp-for="@Model.endDate" type="date" id="endDate" name="endDate">
     </div>
     <span asp-validation-for="@Model.endDate" class="small text-danger"></span>
+   
     @{
         List<TimeSpan> timeSpans = new List<TimeSpan>()
     {
@@ -31,22 +32,23 @@
     new TimeSpan(18,00,00), new TimeSpan(18,30,00),
     new TimeSpan(19,00,00)
     };
-        <div class="time">
-            <select name="startTime" class="start-time">
-                @foreach (var time in timeSpans)
+        <div class="create-dentist-schedule-fieled">
+            <label>Work time</label>
+                <select name="startTime" class="start-time">
+                    @foreach (var time in timeSpans)
                 {
-                    <option value="@time">@time.ToString(@"hh\:mm")</option>
+                        <option value="@time">@time.ToString(@"hh\:mm")</option>
                 }
-            </select>
-            <select name="endTime" class="end-time">
-                @foreach (var time in timeSpans)
+                </select>
+                <select name="endTime" class="end-time">
+                    @foreach (var time in timeSpans)
                 {
-                    <option value="@time">@time.ToString(@"hh\:mm")</option>
+                        <option value="@time">@time.ToString(@"hh\:mm")</option>
                 }
-            </select>
-        </div>
+                </select>
+            </div>
     }
-    <div class="form-field">
-        <button class="btn" type="submit">Save</button>
+    <div class="create-dentist-schedule">
+        <button class="usr-btn" type="submit">Save</button>
     </div>
 </form>

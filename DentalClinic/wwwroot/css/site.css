@@ -26,6 +26,26 @@ a {
     border-color: #1861ac;
 }
 
+.usr-btn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 25%;
+    padding: 0.9rem 2.5rem;
+    text-align: center;
+    background-color: #C0C0C0;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    font-size: 17px;
+    width: 50%;
+
+}
+    .usr-btn:hover {
+        color: #000000;
+    }
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -273,24 +293,6 @@ body {
         text-indent: 40px;
     }
 
-    .login-form .login-form-btn {
-        outline: none;
-        border: none;
-        cursor: pointer;
-        display: inline-block;
-        margin: 0 auto;
-        padding: 0.9rem 2.5rem;
-        text-align: center;
-        background-color: #C0C0C0;
-        color: #fff;
-        border-radius: 4px;
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-        font-size: 17px;
-    }
-
-        .login-form .login-form-btn:hover {
-            color: #000000;
-        }
 
     .login-form .reg {
         outline: none;
@@ -402,21 +404,6 @@ body {
         text-indent: 40px;
     }
 
-    .registration-form .btn {
-        outline: none;
-        border: none;
-        cursor: pointer;
-        display: inline-block;
-        margin: 0 auto;
-        padding: 0.9rem 2.5rem;
-        text-align: center;
-        background-color: #C0C0C0;
-        color: #fff;
-        border-radius: 4px;
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-        font-size: 17px;
-    }
-
     .registration-form .reg {
         outline: none;
         border: none;
@@ -505,20 +492,7 @@ body {
         text-indent: 40px;
     }
 
-    .create-dentist-form .btn {
-        outline: none;
-        border: none;
-        cursor: pointer;
-        display: inline-block;
-        margin: 0 auto;
-        padding: 0.9rem 2.5rem;
-        text-align: center;
-        background-color: #C0C0C0;
-        color: #fff;
-        border-radius: 4px;
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-        font-size: 17px;
-    }
+    
 
 
 /*---------Booked------------*/
@@ -557,3 +531,133 @@ body {
     font-size: 11px;
     font-style: italic;
 }
+
+/*---------Create Doctor Schedule------------*/
+
+.create-dentist-schedule-form {
+    margin: auto;
+    width: 30%;
+    padding-top: 20px;
+}
+
+    .create-dentist-schedule-form .create-dentist-schedule-field::before {
+        font-size: 20px;
+        position: absolute;
+        left: 15px;
+        top: 17px;
+        color: #888888;
+        content: " ";
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 350px;
+    }
+
+    .create-dentist-schedule-form .create-dentist-schedule-field:nth-child(2)::before {
+        background-image: url(../img/calendar-ico.png);
+        width: 20px;
+        height: 20px;
+        top: 15px;
+    }
+
+    .create-dentist-schedule-form .create-dentist-schedule-field:nth-child(4)::before {
+        background-image: url(../img/calendar-ico.png);
+        width: 20px;
+        height: 20px;
+        top: 15px;
+    }
+
+    .create-dentist-schedule-form .create-dentist-schedule-field {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+.create-dentist-schedule-form input {
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    display: block;
+    padding: 0.9rem 0.7rem;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    font-size: 17px;
+    color: #4A4A4A;
+    text-indent: 40px;
+}
+
+
+/*---------Doctor Schedule Reports------------*/
+
+.doctor-scedul-form {
+    margin: auto;
+    width: 30%;
+    padding-top: 20px;
+}
+
+    .doctor-scedul-form .doctor-scedul-field::before {
+        font-size: 20px;
+        position: absolute;
+        left: 15px;
+        top: 17px;
+        color: #888888;
+        content: " ";
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 350px;
+    }
+
+    .doctor-scedul-form .doctor-scedul-field:nth-child(2)::before {
+        background-image: url(../img/calendar-ico.png);
+        width: 20px;
+        height: 20px;
+        top: 15px;
+    }
+
+    .doctor-scedul-form .doctor-scedul-field:nth-child(4)::before {
+        background-image: url(../img/calendar-ico.png);
+        width: 20px;
+        height: 20px;
+        top: 15px;
+    }
+
+    .doctor-scedul-form .doctor-scedul-field {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .doctor-scedul-form input {
+        font-family: inherit;
+        width: 100%;
+        outline: none;
+        background-color: #fff;
+        border-radius: 4px;
+        border: none;
+        display: block;
+        padding: 0.9rem 0.7rem;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        font-size: 17px;
+        color: #4A4A4A;
+        text-indent: 40px;
+    }
+

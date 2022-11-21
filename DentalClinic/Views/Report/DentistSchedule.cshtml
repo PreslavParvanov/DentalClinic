@@ -1,7 +1,8 @@
 ﻿@model DoctorScheduleViewModel
 
-<form class="create-dentist-form" method="post">
-    <div class="form-field">
+<h1 class="text-center">Report doctor schedule</h1>
+<form class="doctor-scedul-form" method="post">
+    <div class="doctor-scedul-field">
         <select asp-for="@Model.DoctorId" class="form-control">
             @foreach (var doctor in Model.Doctors)
             {
@@ -9,15 +10,15 @@
             }
         </select>
     </div>
-    <div class="form-field">
-        <input asp-for="@Model.startDate" type="date-local" id="startDate" name="startDate">
+    <div class="doctor-scedul-field">
+        <input asp-for="@Model.startDate" type="datetime-local" id="startDate" name="startDate">
     </div>
     <span asp-validation-for="@Model.startDate" class="small text-danger"></span>
-    <div class="form-field">
-        <input asp-for="@Model.endDate" type="date-local" id="endDate" name="endDate">
+    <div class="doctor-scedul-field">
+        <input asp-for="@Model.endDate" type="datetime-local" id="endDate" name="endDate">
     </div>
     <span asp-validation-for="@Model.endDate" class="small text-danger"></span>
-    <div class="form-field">
-        <button class="btn" type="submit">Search</button>
+    <div>
+        <button class="usr-btn" type="submit">Search</button>
     </div>
 </form>
