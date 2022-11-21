@@ -22,8 +22,9 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor, DateTime dateStart, DateTime dateEnd, string message)
+        public async Task<IActionResult> Booked(string Title, Guid doctor,  DateTime dateStart, DateTime dateEnd, string message)
         {
+            ViewBag.TitlePage = Title;
             ViewBag.Message = message;
             if (dateStart < DateTime.Now)
             {
@@ -36,7 +37,7 @@ namespace DentalClinic.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Booked(DoctorScheduleViewModel model)
+        public async Task<IActionResult> Booked(DoctorScheduleViewModel model, string Title)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -52,7 +53,7 @@ namespace DentalClinic.Controllers
             
             await doctorService.Booked(model);
             string message = $"Successfully booked for {model.startDate}";
-            return RedirectToAction("Booked", "Booked", new {doctor = model.DoctorId, message = message } );
+            return RedirectToAction("Booked", "Booked", new { Title, doctor = model.DoctorId, message = message } );
             
         }
     }

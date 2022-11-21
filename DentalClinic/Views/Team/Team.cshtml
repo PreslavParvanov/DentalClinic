@@ -3,7 +3,7 @@
     ViewData["Title"] = "Team";
 }
 <body>
-    <h1 class="team">Team</h1>
+    <h1 class="text-center">Teams</h1>
     <table class="tbl-team">
         <tbody>
             @{
@@ -14,6 +14,7 @@
                             <td class="td-team">
                                 <div class="doctor">
                                     <input type="text" id="doctor" name="doctor" value=@doctor.Id style="display:none">
+                                <input type="text" id="doctorName" name="doctorName" value="@doctor.Name" style="display:none">
                                     <div class="doctor-logo">
                                         <img src="../img/avatar.png" width="100" height="100">
                                     </div>

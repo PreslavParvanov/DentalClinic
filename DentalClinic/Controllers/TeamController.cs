@@ -24,9 +24,10 @@ namespace DentalClinic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Team(Guid doctor)
+        public async Task<IActionResult> Team(Guid doctor, string doctorName)
         {
-            return RedirectToAction("Booked", "Booked", new { doctor = doctor });
+            string Title = $"Booked: {doctorName}";
+            return RedirectToAction("Booked", "Booked", new { Title, doctor = doctor });
         }
 
     }
