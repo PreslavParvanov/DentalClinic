@@ -24,7 +24,7 @@ namespace DentalClinic.DB.Data.Configuration
                     LastName="admin",
                     IsActive=1,
                     When = DateTime.Now,
-                    LastActive = DateTime.Now,
+                    LastLogin = DateTime.Now,
                     UserName="admin@gmail.com",
                     Email="admin@gmail.com",
                     EmailConfirmed=true,

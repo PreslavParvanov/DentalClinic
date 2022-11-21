@@ -20,7 +20,7 @@ namespace DentalClinic.DB.Data.Models
         public DateTime When { get; set; } 
 
         [Required]
-        public DateTime LastActive { get; set; }
+        public DateTime LastLogin { get; set; }
 
         public List<Doctor> Doctors { get; set; } = new List<Doctor>();
         public List<DoctorCustomer> DoctorCustomers { get; set; } = new List<DoctorCustomer>();

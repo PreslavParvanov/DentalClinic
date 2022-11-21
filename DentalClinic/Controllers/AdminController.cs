@@ -40,7 +40,18 @@ namespace DentalClinic.Controllers
             }
             try
             {
-                await doctorService.Create(model);
+                var result = await doctorService.GetAll();
+                var doctor = result.Where(d => d.Name.ToUpper()==model.Name.ToUpper()).FirstOrDefault();
+                if (doctor==null)
+                {
+                    await doctorService.Create(model);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "This doctor exists!");
+                    return View(model);
+                }
+                
             }
             catch (Exception ex)
             {
