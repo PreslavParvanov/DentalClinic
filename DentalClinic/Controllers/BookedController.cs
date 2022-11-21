@@ -3,6 +3,7 @@ using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
 using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 using System.Security.Claims;
 
 namespace DentalClinic.Controllers
@@ -21,9 +22,9 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Booked(Guid doctor, DateTime dateStart, DateTime dateEnd)
+        public async Task<IActionResult> Booked(Guid doctor, DateTime dateStart, DateTime dateEnd, string message)
         {
-            
+            ViewBag.Message = message;
             if (dateStart < DateTime.Now)
             {
                 dateStart = DateTime.Now;
@@ -50,7 +51,9 @@ namespace DentalClinic.Controllers
             }
             
             await doctorService.Booked(model);
-            return RedirectToAction("Index", "Home");
+            string message = $"Successfully booked for {model.startDate}";
+            return RedirectToAction("Booked", "Booked", new {doctor = model.DoctorId, message = message } );
+            
         }
     }
 }
