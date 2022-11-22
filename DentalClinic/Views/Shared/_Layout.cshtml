@@ -44,18 +44,19 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="CreateDentist">Create dentist</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="CreateSchedule">Create schedule</a>
-                                    </div>  
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="CreateDentist">Create dentist</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="CreateSchedule">Create schedule</a>
+                                </div>
                             </li>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="Dentists">Dentists</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="Dentists">Dentists</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="DentistSchedule">Dentist schedule</a>
-                                    </div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Report" asp-action="DentistCustomer">Dentist customer</a>
+                                </div>
                             </li>
                         }
                         <partial name="_LoginPartial" />

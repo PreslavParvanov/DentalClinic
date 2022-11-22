@@ -1,4 +1,5 @@
 ﻿using DentalClinic.DB.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinic.BL.Models
@@ -13,7 +14,9 @@ namespace DentalClinic.BL.Models
         [Required]
         public DateTime DateTimeSchedule { get; set; }
 
-        public string? CustomerId { get; set; } 
+        public string? CustomerId { get; set; }
+
+        public User? Users { get; set; }
 
         [Required]
         public bool IsBusy { get; set; }    

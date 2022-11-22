@@ -94,7 +94,8 @@ namespace DentalClinic.BL.Service
         /// Мethod that lists the doctor's schedule to date 
         /// </summary>
         /// <param name="doctor"></param>
-        /// <param name="dateSearch"></param>
+        /// <param name="dateStart"></param>
+        /// /// <param name="dateEnd"></param>
         /// <returns>ToList whit DoctorScheduleViewModel</returns>
         public async Task<IEnumerable<DoctorScheduleViewModel>> GetDoctorSchedule(Guid doctor, DateTime dateStart, DateTime dateEnd)
         {
@@ -189,5 +190,7 @@ namespace DentalClinic.BL.Service
                 }
             }
         }
+
+        
     }
 }

@@ -65,5 +65,31 @@ namespace DentalClinic.BL.Service
                 .ToListAsync();
             return result;
         }
+
+        /// <summary>
+        /// Мethod that lists the doctor's schedule to date 
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="dateStart"></param>
+        /// /// <param name="dateEnd"></param>
+        /// <returns>ToList whit ReportDoctorCustomerViewModel</returns>
+        public async Task<IEnumerable<ReportDoctorCustomerViewModel>> GetDoctorCustomerByDate(Guid doctorId, DateTime dateStart, DateTime dateEnd)
+        {
+            var result = await repo.AllReadonly<DoctorCustomer>()
+                .Where(ds => ds.DoctorId == doctorId
+                    && ds.DateTime >= dateStart
+                    && ds.DateTime <= dateEnd)
+                .Select(ds => new ReportDoctorCustomerViewModel()
+                {
+                    DoctorName = ds.Doctors.Name,
+                    DateTimeSchedule = ds.DateTime,
+                    CustomerName = ds.Users.UserName,
+                    CustomerEmail = ds.Users.Email,
+                    CustomerPhone = ds.Users.PhoneNumber
+                })
+                .OrderBy(ds => ds.DateTimeSchedule)
+                .ToListAsync();
+            return result;
+        }
     }
 }

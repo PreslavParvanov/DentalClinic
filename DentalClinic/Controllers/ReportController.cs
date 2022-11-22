@@ -55,5 +55,29 @@ namespace DentalClinic.Controllers
             return View("DentistScheduleResult",result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DentistCustomer()
+        {
+            var model = new DoctorCustomerViewModel()
+            {
+                Doctors = await doctorService.GetDoctorsAsync()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DentistCustomer(DoctorCustomerViewModel model)
+        {
+            TimeSpan startTime = new TimeSpan(00, 00, 00);
+            TimeSpan endTime = new TimeSpan(23, 59, 59);
+            DateTime startDate = model.DateTimeSchedule + startTime;
+            DateTime endDate = model.DateTimeSchedule + endTime;
+            var result = await reportService.GetDoctorCustomerByDate(model.DoctorId, startDate, endDate);
+
+           // ViewBag.Doctor = result.ElementAt(0).DoctorName;
+            ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
+            return View("DentistCustomerResult", result);
+        }
     }
 }

@@ -10,7 +10,8 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public Guid DoctorId { get; set; }
 
-        public Doctor? Doctors { get; set; }
+        [Required]
+        public Doctor Doctors { get; set; } = null!;
 
         [Required]
         public DateTime DateTime { get; set; }

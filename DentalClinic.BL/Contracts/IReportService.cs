@@ -6,5 +6,6 @@ namespace DentalClinic.BL.Contracts
     {
         Task<IEnumerable<ReportDoctorViewModel>> GetAllDentists();
         Task<IEnumerable<ReportDoctorScheduleViewModel>> GetDentistScheduleByDate(Guid DoctorId, DateTime startDate, DateTime endDate);
+        Task<IEnumerable<ReportDoctorCustomerViewModel>> GetDoctorCustomerByDate(Guid doctorId, DateTime dateStart, DateTime dateEnd);
     }
 }
