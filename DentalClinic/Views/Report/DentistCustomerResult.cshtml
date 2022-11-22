@@ -3,11 +3,12 @@
     ViewData["Title"] = "Report Doctor Customer";
 }
 <h1 class="text-center">Report doctor customer</h1>
-<div class="text-left">
+<div class="report-criteria">
     <p>Criteria:</p>
     <p>        -> Dentist: @ViewBag.Doctor</p>
     <p>        -> Date: @ViewBag.startDate - @ViewBag.endDate</p>
 </div>
+<hr />
 <div class="text-right">
     <a asp-area="" asp-controller="Report" asp-action="DentistCustomer">Back</a>
 </div>
@@ -62,7 +63,8 @@ else
         }
     </table>
 }
-
-<div>
+<hr />
+<div class="report-info">
     <p>Report date: @DateTime.Now</p>
+    <p>Prepare: @ViewBag.reportUserName</p>
 </div>
