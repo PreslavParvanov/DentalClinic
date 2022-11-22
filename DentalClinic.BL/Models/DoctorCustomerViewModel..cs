@@ -14,9 +14,17 @@ namespace DentalClinic.BL.Models
         [Required]
         public DateTime DateTimeSchedule { get; set; }
 
-        public string? CustomerId { get; set; }
+        [Required]
+        public string CustomerId { get; set; } = null!;
 
-        public User? Users { get; set; }
+        [Required]
+        public string CustomerName { get; set; } = null!;
+
+        [Required]
+        public string CustomerEmail { get; set; } = null!;
+
+        [Required]
+        public string CustomerPhone { get; set; } = null!;
 
         [Required]
         public bool IsBusy { get; set; }    

@@ -11,7 +11,7 @@
         </select>
     </div>
     <div class="doctor-scedul-field">
-        <input asp-for="@Model.DateTimeSchedule" type="date"  name="DateTimeSchedule">
+        <input asp-for="@Model.DateTimeSchedule" type="date" name="DateTimeSchedule" value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day">
     </div>
     <span asp-validation-for="@Model.DateTimeSchedule" class="small text-danger"></span>
     <div>

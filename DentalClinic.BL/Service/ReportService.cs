@@ -83,9 +83,9 @@ namespace DentalClinic.BL.Service
                 {
                     DoctorName = ds.Doctors.Name,
                     DateTimeSchedule = ds.DateTime,
-                    CustomerName = ds.Users.UserName,
-                    CustomerEmail = ds.Users.Email,
-                    CustomerPhone = ds.Users.PhoneNumber
+                    CustomerName = ds.CustomerName,
+                    CustomerEmail = ds.CustomerEmail,
+                    CustomerPhone = ds.CustomerPhone
                 })
                 .OrderBy(ds => ds.DateTimeSchedule)
                 .ToListAsync();

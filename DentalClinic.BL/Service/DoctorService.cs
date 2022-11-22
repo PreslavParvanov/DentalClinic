@@ -118,7 +118,7 @@ namespace DentalClinic.BL.Service
         /// </summary>
         /// <param name="doctorScheduleViewModel"></param>
         /// <returns></returns>
-        public async Task Booked(DoctorScheduleViewModel doctorScheduleViewModel)
+        public async Task Booked(DoctorScheduleViewModel doctorScheduleViewModel, string customerName, string customerEmail, string customerPhone)
         {
             var result = await repo.AllReadonly<DoctorSchedule>()
             .Where(ds => ds.DoctorId == doctorScheduleViewModel.DoctorId 
@@ -136,6 +136,9 @@ namespace DentalClinic.BL.Service
                 var doctorCustomer = new DoctorCustomer();
                 doctorCustomer.DoctorId=doctorScheduleViewModel.DoctorId;
                 doctorCustomer.CustomerId = doctorScheduleViewModel.Who;
+                doctorCustomer.CustomerName = customerName;
+                doctorCustomer.CustomerEmail= customerEmail;
+                doctorCustomer.CustomerPhone = customerPhone;
                 doctorCustomer.DateTime = doctorScheduleViewModel.startDate;
                 doctorCustomer.When = DateTime.Now;
                 await repo.AddAsync(doctorCustomer);

@@ -100,7 +100,7 @@ namespace DentalClinic.Controllers
                 return View(doctorScheduleViewModel);
             }
             var result = await doctorService.GetDoctorSchedule(doctorScheduleViewModel.DoctorId, doctorScheduleViewModel.startDate, doctorScheduleViewModel.endDate);
-            if (result==null)
+            if (result.Count()==0)
             {
                 await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
                 return RedirectToAction(nameof(CreateSchedule));

@@ -19,7 +19,14 @@ namespace DentalClinic.DB.Data.Models
         [Required]
         public string CustomerId { get; set; } = null!;
 
-        public IdentityUser Users { get; set; } = null!;
+        [Required]
+        public string CustomerName { get; set; } = null!;
+        
+        [Required]
+        public string CustomerEmail { get; set; } = null!;
+
+        [Required]
+        public string CustomerPhone { get; set; } = null!;
 
         [Required]
         public DateTime When { get; set; }
