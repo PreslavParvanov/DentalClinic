@@ -1,11 +1,12 @@
 ﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
-using DentalClinic.DB.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace DentalClinic.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IDoctorService doctorService;

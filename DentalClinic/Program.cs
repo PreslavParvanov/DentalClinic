@@ -27,6 +27,7 @@ builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IErrorService, ErrorService>();
 builder.Services.AddScoped<IDentalService, DentalSrvService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IReceptionService, ReceptionService>();
 
 var app = builder.Build();
 
