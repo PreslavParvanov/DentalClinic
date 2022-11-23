@@ -43,8 +43,10 @@ namespace DentalClinic.BL.Service
                 .Where(ds => ds.DateTime >= dateStart && ds.DateTime <= dateEnd)
                 .Select(ds => new ReceptionViewModel()
                 {
+                    DoctorId = ds.DoctorId,
                     DoctorName = ds.Doctors.Name,
                     DateTimeSchedule = ds.DateTime,
+                    CustomerId = ds.CustomerId,
                     CustomerName = ds.CustomerName,
                     CustomerEmail = ds.CustomerEmail,
                     CustomerPhone = ds.CustomerPhone
