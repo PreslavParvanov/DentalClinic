@@ -56,5 +56,27 @@ namespace DentalClinic.BL.Service
                 .ToListAsync();
             return result;
         }
+
+        public async Task<ReceptionViewModel> GetBookedDetailsById(Guid DoctorId, string CustomerId, DateTime DateTimeSchedule)
+        {
+            var result = await repo.AllReadonly<DoctorCustomer>()
+               .Where(ds => ds.DateTime == DateTimeSchedule
+                        && ds.CustomerId==CustomerId
+                        && ds.DateTime== DateTimeSchedule)
+               .Select(ds => new ReceptionViewModel()
+               {
+                   DoctorId = ds.DoctorId,
+                   DoctorName = ds.Doctors.Name,
+                   DateTimeSchedule = ds.DateTime,
+                   CustomerId = ds.CustomerId,
+                   CustomerName = ds.CustomerName,
+                   CustomerEmail = ds.CustomerEmail,
+                   CustomerPhone = ds.CustomerPhone
+               })
+               .OrderBy(ds => ds.DoctorName)
+               .ThenBy(ds => ds.DateTimeSchedule)
+               .FirstOrDefaultAsync();
+            return result;
+        }
     }
 }

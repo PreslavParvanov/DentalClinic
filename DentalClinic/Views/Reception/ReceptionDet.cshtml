@@ -1,0 +1,30 @@
+﻿@model ReceptionViewModel
+@{
+    ViewData["Title"] = "Reception";
+}
+<h1 class="text-center">Reception</h1>
+<form class="reception-form" method="post">
+    <div class="reception-field">
+        <input type="text" name="DoctorName" value="@Model.DoctorName">
+    </div>
+    <div class="reception-field">
+        <input type="text" name="CustomerName" value="@Model.CustomerName">
+    </div>
+    <div class="reception-field">
+        <input type="text" name="DateTimeSchedule" value="@Model.DateTimeSchedule">
+    </div>
+    <div>
+        <input type="text" name="Type" placeholder="Type" value="HDR" required hidden />
+        <button class="usr-btn" type="submit">Save</button>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <th>Service</th>
+            </thead>
+            <tbody>
+                <td>test</td>
+            </tbody>
+        </table>
+    </div>
+</form>

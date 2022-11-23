@@ -36,7 +36,8 @@ namespace DentalClinic.Controllers
             }
             else
             {
-                return View();
+                var result = await resectionService.GetBookedDetailsById(DoctorId, CustomerId, curenttDate);
+                return View("ReceptionDet", result);
             }
             
         }
