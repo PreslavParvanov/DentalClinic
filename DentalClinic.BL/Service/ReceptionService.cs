@@ -37,7 +37,7 @@ namespace DentalClinic.BL.Service
         /// <param name="dateStart"></param>
         /// /// <param name="dateEnd"></param>
         /// <returns>ToList whit ReceptionCustomerViewModel</returns>
-        public async Task<IEnumerable<ReceptionViewModel>> GetAllBookdeByDate(DateTime dateStart, DateTime dateEnd)
+        public async Task<IEnumerable<ReceptionViewModel>> GetAllBookedByDate(DateTime dateStart, DateTime dateEnd)
         {
             var result = await repo.AllReadonly<DoctorCustomer>()
                 .Where(ds => ds.DateTime >= dateStart && ds.DateTime <= dateEnd)

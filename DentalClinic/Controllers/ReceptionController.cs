@@ -30,7 +30,7 @@ namespace DentalClinic.Controllers
                 TimeSpan endTime = new TimeSpan(23, 59, 59);
                 DateTime startDate = DateSearch + startTime;
                 DateTime endDate = DateSearch + endTime;
-                var result = await resectionService.GetAllBookdeByDate(startDate, endDate);
+                var result = await resectionService.GetAllBookedByDate(startDate, endDate);
                 ViewBag.dateSearch = DateSearch;
                 return View("ReceptionHdr", result);
             }
