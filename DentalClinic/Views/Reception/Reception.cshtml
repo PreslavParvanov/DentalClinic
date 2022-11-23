@@ -5,7 +5,7 @@
 <h1 class="text-center">Reception</h1>
 <form class="reception-form" method="post">
     <div class="reception-field">
-        <input type="date" name="DateSearch" >
+        <input type="date" name="DateSearch" value="@ViewBag.dateSearch">
     </div>
     <div>
         <button class="usr-btn" type="submit">Search</button>
@@ -18,28 +18,34 @@
         HashSet<string> doctors = Model.Select(ds => ds.DoctorName).ToHashSet<string>();
         string[,] matrix = new string[20, doctors.Count() + 1];
         matrix[0, 0] = "";
-        for (int col = 1; col < doctors.Count()+1; col++)
-        {
-            matrix[0, col] = doctors.ElementAt(col - 1);
-        }
-        TimeSpan timeTemp = new TimeSpan(10, 00, 00);
-        for (int row = 1; row < 20; row++)
-        {
-            matrix[row, 0] = $"{timeTemp.Hours}:{timeTemp.Minutes.ToString()}";
-            timeTemp = timeTemp + new TimeSpan(00, 30, 00);
-        }
 
-        for (int row = 1; row < 20; row++)
+        TimeSpan timeTemp = new TimeSpan(09, 30, 00);
+
+        for (int row = 0; row < 20; row++)
         {
-            for (int col = 1; col < doctors.Count() + 1; col++)
+            for (int col = 0; col < doctors.Count() + 1; col++)
             {
-                string doc = matrix[0, col];
-                string time = matrix[row, 0];
-                //da se drypne ot modela butona зa час
+                if (row==0 && col>0)
+                {
+                    matrix[row, col] = doctors.ElementAt(col-1);
+                }
+                if (col == 0 && row>0)
+        {
+                    timeTemp = timeTemp + new TimeSpan(00, 30, 00);
+                    DateTime currentDataTime = ViewBag.dateSearch + timeTemp;
+                    matrix[row, 0] = currentDataTime.ToString();
 
-                //matrix[row, col] = Model.Where(ds => ds.DoctorName == doc).ToString();
-            }
+                }
+                if (col>0 && row>0)
+                {
+                    string doc = matrix[0, col];
+                    DateTime currentDataTime = ViewBag.dateSearch + timeTemp;
+                    string currentCustomerName = Model.Where(ds => ds.DoctorName == doc && ds.DateTimeSchedule == currentDataTime).Select(ds => ds.CustomerName).FirstOrDefault();
+
+                    matrix[row, col] = currentCustomerName;
+                }
                 
+            }     
         }
 
         <table class="table table-striped">
@@ -50,7 +56,15 @@
                         @{
                             for (int col = 0; col < doctors.Count()+1; col++)
                             {
-                                <td class="col" scope="col">@matrix[row, col]</td>
+                                if (col > 0 && row > 0 && @matrix[row, col] != null)
+                                {
+                                    <td class="col" scope="col"><button>@matrix[row, col]</button></td>
+                                }
+                                else
+                                {
+                                    <td class="col" scope="col">@matrix[row, col]</td>
+                                }
+                                
                             }
                         }
                     </tr>

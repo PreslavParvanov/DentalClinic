@@ -17,6 +17,7 @@ namespace DentalClinic.Controllers
         [HttpGet]
         public IActionResult Reception()
         {
+            ViewBag.dateSearch = DateTime.Now;
             return View();
         }
 
@@ -28,6 +29,7 @@ namespace DentalClinic.Controllers
             DateTime startDate = DateSearch + startTime;
             DateTime endDate = DateSearch + endTime;
             var result = await resectionService.GetAllBookdeByDate(startDate, endDate);
+            ViewBag.dateSearch = DateSearch;
             return View(result);
         }
     }
