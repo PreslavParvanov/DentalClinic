@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalClinic.BL", "DentalCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalClinic.DB", "DentalClinic.DB\DentalClinic.DB.csproj", "{47591BF6-58B5-46BE-85A4-4393020E2823}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.Api", "DentalClinic.Api\DentalClinic.Api.csproj", "{D4A223B1-7A8B-48AF-B6E3-C87041DA0B5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalClinic.Api", "DentalClinic.Api\DentalClinic.Api.csproj", "{D4A223B1-7A8B-48AF-B6E3-C87041DA0B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.UnitTests", "DentalClinic.UnitTests\DentalClinic.UnitTests.csproj", "{D5F5914F-A923-4360-A665-2F705611EC3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D4A223B1-7A8B-48AF-B6E3-C87041DA0B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A223B1-7A8B-48AF-B6E3-C87041DA0B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A223B1-7A8B-48AF-B6E3-C87041DA0B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5F5914F-A923-4360-A665-2F705611EC3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F5914F-A923-4360-A665-2F705611EC3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F5914F-A923-4360-A665-2F705611EC3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F5914F-A923-4360-A665-2F705611EC3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
