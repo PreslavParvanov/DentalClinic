@@ -251,8 +251,8 @@ namespace DentalClinic.UnitTests
                 var doctorSchedule = new DoctorScheduleViewModel()
                 {
                     DoctorId = doctorId,
-                    startDate = DateTime.Now.Date,
-                    endDate = DateTime.Now.Date.AddDays(1),
+                    startDate = DateTime.Now.Date.AddDays(3),
+                    endDate = DateTime.Now.Date.AddDays(4),
                     IsBusy = true,
                     Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
                 };
