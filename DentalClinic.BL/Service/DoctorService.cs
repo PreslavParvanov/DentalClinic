@@ -9,13 +9,6 @@ namespace DentalClinic.BL.Service
 {
     public class DoctorService : IDoctorService
     {
-        private readonly IConfiguration config;
-
-        public  DoctorService(IConfiguration _config)
-        {
-            config = _config;
-        }
-
 
         private readonly IRepository repo;
 
@@ -23,11 +16,8 @@ namespace DentalClinic.BL.Service
         /// IoC 
         /// </summary>
         /// <param name="_config">Application configuration</param>
-        public DoctorService(
-            IConfiguration _config,
-            IRepository _repo)
+        public DoctorService(IRepository _repo)
         {
-            config = _config;
             repo = _repo;
         }
         /// <summary>
