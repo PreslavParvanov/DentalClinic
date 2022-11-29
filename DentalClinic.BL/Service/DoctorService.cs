@@ -162,9 +162,9 @@ namespace DentalClinic.BL.Service
         public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime)
         {
             DateTime currentDateTime = doctorScheduleViewModel.startDate+startTime;
-            DateTime endDate = doctorScheduleViewModel.endDate+ endTime;
+            DateTime endDate = doctorScheduleViewModel.endDate + endTime;
 
-            while (endDate > currentDateTime)
+            while (endDate >= currentDateTime)
             { 
                 var doctorSchedule = new DoctorSchedule()
                 {
