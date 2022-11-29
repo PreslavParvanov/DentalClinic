@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Configuration;
 using DentalClinic.BL.Contracts;
+using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data;
@@ -22,7 +23,7 @@ namespace DentalClinic.UnitTests
 
 
         [SetUp]
-        public void Setup()
+        public void TestInitialize()
         {
             doctors = new List<Doctor>()
             {
@@ -65,8 +66,8 @@ namespace DentalClinic.UnitTests
 
             using (var dbContext = new ApplicationDbContext(options))
             {
-                IRepository repo = new Repository(dbContext);
-                IDoctorService doctorService = new DoctorService(repo);
+                repo = new Repository(dbContext);
+                doctorService = new DoctorService(repo);
 
                 var resultService = await doctorService.GetAll();
                 var orderListResultService = resultService.OrderBy(d => d.Id).ToList();
@@ -87,5 +88,106 @@ namespace DentalClinic.UnitTests
             }
         }
 
+        [Test]
+        public async Task Test_GetDoctorById()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+           .UseInMemoryDatabase(databaseName: "DentalClinicTest")
+           .Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                doctorService = new DoctorService(repo);
+                Guid doctorId = Guid.Parse("5972406a-1f00-4b42-982d-f6e0718da358");
+
+                var resultService = await doctorService.GetDoctorById(doctorId);
+                var orderListResultService = resultService.OrderBy(d => d.Id).ToList();
+                var resultDb = await dbContext.Doctors.Where(d => d.Id == doctorId).OrderBy(d => d.Id).ToListAsync();
+
+                Assert.That(resultService.Count(), Is.EqualTo(resultDb.Count()));
+
+                if (resultService.Count() == resultDb.Count())
+                {
+                    for (int i = 0; i < orderListResultService.Count(); i++)
+                    {
+                        Assert.That(resultDb[i].Id, Is.EqualTo(orderListResultService[i].Id));
+                        Assert.That(orderListResultService[i].Name, Is.EqualTo(resultDb[i].Name));
+                        Assert.That(resultDb[i].Qualification, Is.EqualTo(orderListResultService[i].Qualification));
+                        Assert.That(resultDb[i].MoreInfo, Is.EqualTo(orderListResultService[i].MoreInfo));
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public async Task Test_Create()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+           .UseInMemoryDatabase(databaseName: "DentalClinicTest")
+           .Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                doctorService = new DoctorService(repo);
+                Guid doctorId = Guid.NewGuid();
+                var doctor = new DoctorViewModel()
+                {
+                    Id = doctorId,
+                    Name = "Dimitrichko Dimitrochkov",
+                    Qualification = "Dentist",
+                    MoreInfo = "More Info",
+                    Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
+                    
+                };
+
+                await doctorService.Create(doctor);
+                var resultDb = await dbContext.Doctors.Where(d => d.Name == doctor.Name).ToListAsync();
+                if (resultDb.Count>0)
+                {
+                    Assert.That(doctor.Name, Is.EqualTo(resultDb[0].Name));
+                    Assert.That(doctor.Qualification, Is.EqualTo(resultDb[0].Qualification));
+                    Assert.That(doctor.MoreInfo, Is.EqualTo(resultDb[0].MoreInfo));
+                    Assert.That(doctor.Who, Is.EqualTo(resultDb[0].Who));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
+                
+            }
+        }
+
+        [Test]
+        public async Task Test_GetDoctorsAsync()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+           .UseInMemoryDatabase(databaseName: "DentalClinicTest")
+           .Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                doctorService = new DoctorService(repo);
+
+                var resultService = await doctorService.GetDoctorsAsync();
+                var orderListResultService = resultService.OrderBy(d => d.Id).ToList();
+                var resultDb = await dbContext.Doctors.OrderBy(d => d.Id).ToListAsync();
+
+                Assert.True(resultService.Count() == resultDb.Count());
+
+                if (resultService.Count() == resultDb.Count())
+                {
+                    for (int i = 0; i < orderListResultService.Count(); i++)
+                    {
+                        Assert.That(resultDb[i].Id, Is.EqualTo(orderListResultService[i].Id));
+                        Assert.That(orderListResultService[i].Name, Is.EqualTo(resultDb[i].Name));
+                        Assert.That(resultDb[i].Qualification, Is.EqualTo(orderListResultService[i].Qualification));
+                        Assert.That(resultDb[i].MoreInfo, Is.EqualTo(orderListResultService[i].MoreInfo));
+                    }
+                }
+            }
+        }
     }
 }

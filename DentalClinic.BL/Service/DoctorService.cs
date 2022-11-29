@@ -155,6 +155,8 @@ namespace DentalClinic.BL.Service
         /// Create chedules by date
         /// </summary>
         /// <param name="doctorScheduleViewModel"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
         /// <returns></returns>
 
         public async Task CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime)
