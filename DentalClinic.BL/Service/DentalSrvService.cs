@@ -56,8 +56,6 @@ namespace DentalClinic.BL.Service
             return result;
         }
 
-        
-
         /// <summary>
         /// 
         /// </summary>
