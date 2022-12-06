@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace DentalClinic.UnitTests
 {
-    internal class DentalSrvServiceUnitiTests
+    internal class DentalSrvServiceUnitTests
     {
         private List<DentalService> dentalServices;
         private User user;
