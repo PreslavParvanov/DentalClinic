@@ -26,7 +26,7 @@ namespace DentalClinic.DB.Data.Models
         public List<DoctorCustomer> DoctorCustomers { get; set; } = new List<DoctorCustomer>();
         public List<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
 
-
+        public List<DentalService> DentalServices { get; set; } = new List<DentalService>();
 
     }
 }

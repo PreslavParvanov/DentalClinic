@@ -46,7 +46,6 @@ namespace DentalClinic.DB.Data
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
 
-        //public DbSet<User> Users { get; set; } = null;
         public DbSet<DoctorCustomer> DoctorsCustomers { get; set; } = null!;
         public DbSet<DoctorSchedule> DoctorsSchedules { get; set; } = null!;
         public DbSet<DentalService> DentalServices { get; set; } = null!;
