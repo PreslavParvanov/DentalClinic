@@ -2,20 +2,16 @@
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data.Models;
 using DentalClinic.DB.Data;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DentalClinic.BL.Service;
 using DentalClinic.BL.Models;
-using System.Numerics;
+
 
 namespace DentalClinic.UnitTests
 {
     internal class DentalSrvServiceUnitTests
     {
         private List<DentalService> dentalServices;
-        private User user;
-
 
         private IDentalService dentalService;
         private IRepository repo;
