@@ -5,6 +5,7 @@ using DentalClinic.DB.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DentalClinic.BL.Service;
 
 namespace DentalClinic.UnitTests
 {
@@ -85,8 +86,37 @@ namespace DentalClinic.UnitTests
                     .UseInMemoryDatabase(databaseName: "DentalClinicTest")
                     .Options;
             this.dbContext = new ApplicationDbContext(options);
-            this.dbContext.AddRange(dentalService);
+            this.dbContext.AddRange(dentalServices);
             this.dbContext.SaveChanges();
+        }
+
+        [Test]
+        public async Task Test_AllDentalServices()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+           .UseInMemoryDatabase(databaseName: "DentalClinicTest")
+           .Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                dentalService = new DentalSrvService(repo);
+
+                var resultService = await dentalService.GetAll();
+                var orderListResultService = resultService.OrderBy(d => d.ServiceName).ToList();
+                var resultDb = await dbContext.DentalServices.OrderBy(d => d.ServiceName).ToListAsync();
+
+                Assert.True(resultService.Count() == resultDb.Count());
+
+                if (resultService.Count() == resultDb.Count())
+                {
+                    for (int i = 0; i < orderListResultService.Count(); i++)
+                    {
+                        Assert.That(resultDb[i].ServiceName, Is.EqualTo(orderListResultService[i].ServiceName));
+                        Assert.That(resultDb[i].ServiceDescription, Is.EqualTo(orderListResultService[i].ServiceDescription));
+                    }
+                }
+            }
         }
     }
 }
