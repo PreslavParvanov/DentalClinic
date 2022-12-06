@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DentalClinic.BL.Service;
+using DentalClinic.BL.Models;
+using System.Numerics;
 
 namespace DentalClinic.UnitTests
 {
@@ -163,6 +165,39 @@ namespace DentalClinic.UnitTests
                 var resultDb = await dbContext.DentalServices.Where(ds => ds.Id == dentalServiceId).OrderBy(ds => ds.ServiceName).ToListAsync();
 
                 Assert.True(resultService.Count() == resultDb.Count());
+            }
+        }
+
+        [Test]
+        public async Task Test_CreateDentalService()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                dentalService = new DentalSrvService(repo);
+
+                var dentalServiceViewModel = new DentalServiceViewModel
+                {
+                    ServiceName = "Test_ServiceName",
+                    ServiceDescription = "Test_ServiceDescription",
+                    Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
+                    When = DateTime.Now
+                };
+
+                await dentalService.Create(dentalServiceViewModel);
+                var resultDb = await dbContext.DentalServices.Where(ds => ds.ServiceName == "Test_ServiceName").FirstOrDefaultAsync();
+                if (resultDb != null)
+                {
+                    Assert.That(dentalServiceViewModel.ServiceName, Is.EqualTo(resultDb.ServiceName));
+                    Assert.That(dentalServiceViewModel.ServiceDescription, Is.EqualTo(resultDb.ServiceDescription));
+                    Assert.That(dentalServiceViewModel.Who, Is.EqualTo(resultDb.Who));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
             }
         }
     }
