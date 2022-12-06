@@ -157,7 +157,6 @@ namespace DentalClinic.UnitTests
             {
                 repo = new Repository(dbContext);
                 dentalService = new DentalSrvService(repo);
-
                 Guid dentalServiceId = Guid.Parse("613807f1-31c8-4523-aa93-a97243da1f1e");
 
                 var resultService = await dentalService.GetServiceById(dentalServiceId);
