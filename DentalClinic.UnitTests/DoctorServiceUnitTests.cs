@@ -1,13 +1,10 @@
-﻿using Castle.Core.Configuration;
-using DentalClinic.BL.Contracts;
+﻿using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data;
 using DentalClinic.DB.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Numerics;
 
 
 namespace DentalClinic.UnitTests
