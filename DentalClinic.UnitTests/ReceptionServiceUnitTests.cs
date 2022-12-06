@@ -8,6 +8,7 @@ using DentalClinic.BL.Models;
 
 using DentalClinic.BL.Service;
 using Castle.Core.Resource;
+using System.Numerics;
 
 namespace DentalClinic.UnitTests
 {
@@ -23,7 +24,7 @@ namespace DentalClinic.UnitTests
         {
             var doctor = new Doctor()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535"),
                 Name = "Dr. Ivanov",
                 IsActive = 1,
                 Qualification = "4 Year",
@@ -110,6 +111,135 @@ namespace DentalClinic.UnitTests
                 var resultDb = await dbContext.DoctorsCustomers.Where(dc => dc.DateTime >= startSearchDate && dc.DateTime <= endSearchDate).OrderBy(dc => dc.DoctorId).ThenBy(dc => dc.DateTime).ToListAsync();
 
                 Assert.True(resultService.Count() == resultDb.Count());
+            }
+        }
+
+        [Test]
+        public async Task Test_GetBookedDetailsById()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                receptionService = new ReceptionService(repo);
+                var doctorId = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535");
+                var customerId = "5972406a-1f00-4b42-982d-f6e0718da358";
+                var dateTimeSchedule = DateTime.ParseExact("2022-12-06 11:00:00,000", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+                
+                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule);
+                var resultDb = await dbContext.DoctorsCustomers
+                    .Where(dc => dc.DoctorId==doctorId)
+                    .Where(dc => dc.CustomerId == customerId)
+                    .Where(dc => dc.DateTime == dateTimeSchedule)
+                    .FirstOrDefaultAsync();
+
+                if (resultDb !=null)
+                {
+                    Assert.That(resultService.DoctorId, Is.EqualTo(resultDb.DoctorId));
+                    Assert.That(resultService.DateTimeSchedule, Is.EqualTo(resultDb.DateTime));
+                    Assert.That(resultService.CustomerId, Is.EqualTo(resultDb.CustomerId));
+                    Assert.That(resultService.CustomerName, Is.EqualTo(resultDb.CustomerName));
+                    Assert.That(resultService.CustomerEmail, Is.EqualTo(resultDb.CustomerEmail));
+                    Assert.That(resultService.CustomerPhone, Is.EqualTo(resultDb.CustomerPhone));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
+            }
+        }
+
+        [Test]
+        public async Task Test_GetBookedDetailsById_InvalidDoctorId()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                receptionService = new ReceptionService(repo);
+                var doctorId = Guid.Parse("b6875d05-fe64-4500-ad6d-a69fadccb597");
+                var customerId = "5972406a-1f00-4b42-982d-f6e0718da358";
+                var dateTimeSchedule = DateTime.ParseExact("2022-12-06 11:00:00,000", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+
+                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule);
+                var resultDb = await dbContext.DoctorsCustomers
+                    .Where(dc => dc.DoctorId == doctorId)
+                    .Where(dc => dc.CustomerId == customerId)
+                    .Where(dc => dc.DateTime == dateTimeSchedule)
+                    .FirstOrDefaultAsync();
+
+                if (resultDb != null)
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("OK"));
+                }
+            }
+        }
+
+        [Test]
+        public async Task Test_GetBookedDetailsById_InvalidCustomerId()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                receptionService = new ReceptionService(repo);
+                var doctorId = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535");
+                var customerId = "41b65854-a500-4912-9077-24a95afd1875";
+                var dateTimeSchedule = DateTime.ParseExact("2022-12-06 11:00:00,000", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+
+                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule);
+                var resultDb = await dbContext.DoctorsCustomers
+                    .Where(dc => dc.DoctorId == doctorId)
+                    .Where(dc => dc.CustomerId == customerId)
+                    .Where(dc => dc.DateTime == dateTimeSchedule)
+                    .FirstOrDefaultAsync();
+
+                if (resultDb != null)
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("OK"));
+                }
+            }
+        }
+
+        [Test]
+        public async Task Test_GetBookedDetailsById_InvalidDateTimeSchedule()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                repo = new Repository(dbContext);
+                receptionService = new ReceptionService(repo);
+                var doctorId = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535");
+                var customerId = "5972406a-1f00-4b42-982d-f6e0718da358";
+                var dateTimeSchedule = DateTime.ParseExact("2022-12-31 11:00:00,000", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+
+                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule);
+                var resultDb = await dbContext.DoctorsCustomers
+                    .Where(dc => dc.DoctorId == doctorId)
+                    .Where(dc => dc.CustomerId == customerId)
+                    .Where(dc => dc.DateTime == dateTimeSchedule)
+                    .FirstOrDefaultAsync();
+
+                if (resultDb != null)
+                {
+                    Assert.That("OK", Is.EqualTo("Error"));
+                }
+                else
+                {
+                    Assert.That("OK", Is.EqualTo("OK"));
+                }
             }
         }
     }

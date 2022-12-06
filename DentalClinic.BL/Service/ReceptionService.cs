@@ -3,7 +3,6 @@ using DentalClinic.BL.Models;
 using DentalClinic.DB.Common;
 using DentalClinic.DB.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace DentalClinic.BL.Service
 {
