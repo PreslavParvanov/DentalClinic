@@ -1,4 +1,5 @@
 ﻿using DentalClinic.BL.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalClinic.Controllers

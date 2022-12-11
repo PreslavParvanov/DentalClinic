@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace DentalClinic.Controllers
+namespace DentalClinic.Areas.Admin.Controllers
 {
     [Authorize]
-    public class AdminController : Controller
+    public class AdminController : AdminBaseController
     {
         private readonly IDoctorService doctorService;
         private readonly IErrorService errorService;
 
 
         public AdminController(
-            IDoctorService _doctorService, 
+            IDoctorService _doctorService,
             IErrorService _errorService)
         {
             doctorService = _doctorService;
@@ -35,7 +35,7 @@ namespace DentalClinic.Controllers
             {
                 model.Who = userId.ToString();
             }
-            
+
             if (ModelState.IsValid)
             {
                 return View(model);
@@ -43,8 +43,8 @@ namespace DentalClinic.Controllers
             try
             {
                 var result = await doctorService.GetAll();
-                var doctor = result.Where(d => d.Name.ToUpper()==model.Name.ToUpper()).FirstOrDefault();
-                if (doctor==null)
+                var doctor = result.Where(d => d.Name.ToUpper() == model.Name.ToUpper()).FirstOrDefault();
+                if (doctor == null)
                 {
                     await doctorService.Create(model);
                 }
@@ -53,14 +53,14 @@ namespace DentalClinic.Controllers
                     ModelState.AddModelError("", "This doctor exists!");
                     return View(model);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 await errorService.DCLog(ex);
                 return View(model);
             }
-            return RedirectToAction(nameof(CreateDentist)); 
+            return RedirectToAction(nameof(CreateDentist));
         }
 
         [HttpGet]
@@ -88,7 +88,7 @@ namespace DentalClinic.Controllers
                 doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
                 return View(doctorScheduleViewModel);
             }
-            if (doctorScheduleViewModel.endDate<= doctorScheduleViewModel.startDate)
+            if (doctorScheduleViewModel.endDate <= doctorScheduleViewModel.startDate)
             {
                 ModelState.AddModelError("", "end Date is < or = on start Date!");
                 doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
@@ -101,7 +101,7 @@ namespace DentalClinic.Controllers
                 return View(doctorScheduleViewModel);
             }
             var result = await doctorService.GetDoctorSchedule(doctorScheduleViewModel.DoctorId, doctorScheduleViewModel.startDate, doctorScheduleViewModel.endDate);
-            if (result.Count()==0)
+            if (result.Count() == 0)
             {
                 await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
                 return RedirectToAction(nameof(CreateSchedule));
@@ -112,8 +112,8 @@ namespace DentalClinic.Controllers
                 doctorScheduleViewModel.Doctors = await doctorService.GetDoctorsAsync();
                 return View(doctorScheduleViewModel);
             }
-            
-            
+
+
         }
     }
 }

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace DentalClinic.Controllers
+namespace DentalClinic.Areas.Admin.Controllers
 {
     [Authorize]
-    public class ReportController : Controller
+    public class ReportController : AdminBaseController
     {
         //Dentist
         private readonly IReportService reportService;
@@ -31,7 +31,7 @@ namespace DentalClinic.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> Dentists()
+        public async Task<IActionResult> Dentists()
         {
             var result = await reportService.GetAllDentists();
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -57,7 +57,7 @@ namespace DentalClinic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DentistSchedule(Guid DoctorId,  DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> DentistSchedule(Guid DoctorId, DateTime startDate, DateTime endDate)
         {
             var result = await reportService.GetDentistScheduleByDate(DoctorId, startDate, endDate);
             var doctor = await doctorService.GetDoctorById(DoctorId);
@@ -70,9 +70,9 @@ namespace DentalClinic.Controllers
             }
             ViewBag.reportUserName = reportUserName;
             ViewBag.Doctor = doctor.ElementAt(0).Name;
-            ViewBag.startDate = startDate; 
+            ViewBag.startDate = startDate;
             ViewBag.endDate = endDate;
-            return View("DentistScheduleResult",result);
+            return View("DentistScheduleResult", result);
         }
 
         [HttpGet]

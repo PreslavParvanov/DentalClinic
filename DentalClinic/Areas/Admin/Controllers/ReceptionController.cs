@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalClinic.Controllers
+namespace DentalClinic.Areas.Admin.Controllers
 {
     [Authorize]
-    public class ReceptionController : Controller
+    public class ReceptionController : AdminBaseController
     {
         private readonly IReceptionService resectionService;
 
@@ -24,7 +24,7 @@ namespace DentalClinic.Controllers
         [HttpPost]
         public async Task<IActionResult> Reception(string Type, DateTime DateSearch, Guid DoctorId, string CustomerId, DateTime curenttDate)
         {
-            if (Type =="HDR")
+            if (Type == "HDR")
             {
                 TimeSpan startTime = new TimeSpan(00, 00, 00);
                 TimeSpan endTime = new TimeSpan(23, 59, 59);
@@ -39,7 +39,7 @@ namespace DentalClinic.Controllers
                 var result = await resectionService.GetBookedDetailsById(DoctorId, CustomerId, curenttDate);
                 return View("ReceptionDet", result);
             }
-            
+
         }
     }
 }
