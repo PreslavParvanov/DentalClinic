@@ -15,22 +15,27 @@ namespace DentalClinic.DB.Data.Configuration
 
         private List<User> CreateUsers()
         {
-            List<User> users = new List<User>()
-             {
-                new User
-                {
-                    Id="0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                    FirstName="admin",
-                    LastName="admin",
-                    IsActive=1,
-                    When = DateTime.Now,
-                    LastLogin = DateTime.Now,
-                    UserName="admin@gmail.com",
-                    Email="admin@gmail.com",
-                    EmailConfirmed=true,
-                    PasswordHash="Admin@123"
-                }
+            var users = new List<User>();
+            var hasher = new PasswordHasher<User>();
+
+            var user = new User()
+            {
+                Id = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
+                FirstName = "admin",
+                LastName = "admin",
+                IsActive = 1,
+                When = DateTime.Now,
+                LastLogin = DateTime.Now,
+                UserName = "admin@admin.com",
+                Email = "admin@admin.com",
+                EmailConfirmed = true,
+                
             };
+
+            user.PasswordHash =
+                hasher.HashPassword(user, "Admin@123");
+
+            users.Add(user);
 
             return users;
         }

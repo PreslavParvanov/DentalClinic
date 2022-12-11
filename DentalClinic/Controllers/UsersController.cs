@@ -3,6 +3,7 @@ using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static DentalClinic.Areas.Admin.Constants.AdminConstants;
 
 namespace DentalClinic.Controllers
 {
@@ -12,19 +13,27 @@ namespace DentalClinic.Controllers
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly ILogger logger;
 
         public UsersController(
                                 UserManager<User> _userManager,
-                                SignInManager<User> _signInManager)
+                                SignInManager<User> _signInManager,
+                                ILogger<HomeController> _logger)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            logger = _logger;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
+
             var model = new UserViewModel();
 
             return View(model);

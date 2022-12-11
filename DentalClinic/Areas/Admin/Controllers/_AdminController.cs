@@ -7,13 +7,13 @@ using System.Security.Claims;
 namespace DentalClinic.Areas.Admin.Controllers
 {
     [Authorize]
-    public class AdminController : AdminBaseController
+    public class _AdminController : AdminBaseController
     {
         private readonly IDoctorService doctorService;
         private readonly IErrorService errorService;
 
 
-        public AdminController(
+        public _AdminController(
             IDoctorService _doctorService,
             IErrorService _errorService)
         {
