@@ -24,7 +24,8 @@ namespace DentalClinic.DB.Data.Configuration
                     MoreInfo = "Doctor Radeva has 5 years of experience as a dentist.",
                     IsActive = 1,
                     Who="0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                    When = DateTime.Now
+                    When = DateTime.Now,
+                    ImageUrl="https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968085/avatar_nifdc5.jpg"
                 },
                 new Doctor
                 {
@@ -34,7 +35,8 @@ namespace DentalClinic.DB.Data.Configuration
                     MoreInfo = "Doctor Valeva has 3 years of experience as a оrthodontist.",
                     IsActive = 1,
                     Who="0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                    When = DateTime.Now
+                    When = DateTime.Now,
+                    ImageUrl="https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968085/avatar_nifdc5.jpg"
                 }
             };
 

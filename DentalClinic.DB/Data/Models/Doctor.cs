@@ -27,5 +27,8 @@ namespace DentalClinic.DB.Data.Models
 
         [Required]
         public DateTime When { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; } = null!;
     }
 }
