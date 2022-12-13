@@ -1,6 +1,7 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using DentalClinic.BL.Contracts;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +19,21 @@ namespace DentalClinic.BL.Service
 
         Account account = new Account(CloudinaryName, CloudinaryKey, CloudinarySecret);
 
-        public async Task<string> UploadImage(string FileName, string FileData)
+        public async Task<string> UploadImage(string filePath)
         {
-            string result = "OK";
+            string result = "";
             try
             {
                 Cloudinary _cloudinary = new Cloudinary(account);
                 var uploadParams = new ImageUploadParams()
                 {
-                    File = new FileDescription(@"D:\SoftUni\Project\DentalClinic\DentalClinic\wwwroot\img\home.jpg")
+                    File = new FileDescription(filePath)
                 };
                 var uploadResult = _cloudinary.Upload(uploadParams);
+                result = uploadResult.Uri.ToString();
             }
             catch (Exception ex)
             {
-
                 result = ex.Message.ToString();
             }
 

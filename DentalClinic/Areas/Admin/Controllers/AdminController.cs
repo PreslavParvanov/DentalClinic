@@ -1,23 +1,30 @@
-﻿using DentalClinic.BL.Contracts;
+﻿using CloudinaryDotNet.Actions;
+using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
+using DentalClinic.BL.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using System.Security.Claims;
 
 namespace DentalClinic.Areas.Admin.Controllers
 {
     [Authorize]
-    public class _AdminController : AdminBaseController
+    public class AdminController : AdminBaseController
     {
         private readonly IDoctorService doctorService;
         private readonly IErrorService errorService;
+        private readonly ICloudinaryService cloudinaryService;
 
 
-        public _AdminController(
+        public AdminController(
             IDoctorService _doctorService,
+            ICloudinaryService _cloudinaryService,
             IErrorService _errorService)
         {
             doctorService = _doctorService;
+            cloudinaryService = _cloudinaryService;
             errorService = _errorService;
         }
 
@@ -28,8 +35,23 @@ namespace DentalClinic.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDentist(DoctorViewModel model)
+        public async Task<IActionResult> CreateDentist(DoctorViewModel model, IFormFile img)
         {
+            var filePath = Path.GetTempFileName();
+            if (img!=null)
+            {
+                
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await img.CopyToAsync(stream);
+                }
+            }
+            else
+            {
+                return View(model);
+            }
+            
+            
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userId != null)
             {
@@ -46,6 +68,7 @@ namespace DentalClinic.Areas.Admin.Controllers
                 var doctor = result.Where(d => d.Name.ToUpper() == model.Name.ToUpper()).FirstOrDefault();
                 if (doctor == null)
                 {
+                    var imageUrl = await cloudinaryService.UploadImage(filePath);
                     await doctorService.Create(model);
                 }
                 else

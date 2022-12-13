@@ -9,6 +9,6 @@ namespace DentalClinic.BL.Contracts
 {
     public interface ICloudinaryService
     {
-        Task<string> UploadImage(string FileName, string FileData);
+        Task<string> UploadImage(string filePath);
     }
 }

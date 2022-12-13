@@ -1,4 +1,5 @@
-﻿using DentalClinic.DB.Data.Models;
+﻿using DentalClinic.BL.Contracts;
+using DentalClinic.DB.Data.Models;
 using DentalClinic.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,18 +12,18 @@ namespace DentalClinic.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
         private readonly UserManager<User> userManager;
 
         public HomeController(ILogger<HomeController> logger
-                            , UserManager<User> userManager)
+                            , UserManager<User> _userManager)
         {
             _logger = logger;
-            this.userManager = userManager;
+            userManager = _userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-
             if (User.IsInRole(AdminRolleName))
             {
                 return RedirectToAction("Index", "AdminHome", new { area = "Admin" });

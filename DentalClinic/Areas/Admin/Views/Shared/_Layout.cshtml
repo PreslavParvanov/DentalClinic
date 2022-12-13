@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{/*Admin page*/}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ADMIN - Dental Clinic</title>
-    <link rel="icon" type="image/x-icon" href="~/img/logo.png">
+    <link rel="icon" type="image/x-icon" src="http://res.cloudinary.com/ddfrnob2x/image/upload/v1670966541/diuzqrk4scauwwup2m5b.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -12,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a asp-area="" asp-controller="Home" asp-action="Index"><img class="navbar-brand" src="~/Img/logo.png" /></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"><img class="navbar-brand" src="http://res.cloudinary.com/ddfrnob2x/image/upload/v1670966541/diuzqrk4scauwwup2m5b.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,10 +32,10 @@
                         @if (!User?.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Registration">Registration</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Registration">Registration</a>
                             </li>
                         }
                         else
@@ -59,7 +60,7 @@
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Reception" asp-action="Reception">Reception</a>
                             </li>
                         }
-                        <partial name="_AdminLoginPartial" />
+                        <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>
@@ -79,8 +80,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/Test.js" asp-append-version="true"></script>
-    <script src="~/js/NavBarController.js" asp-append-version="true"></script>
+    <script src="~/js/NavBarAdminPage.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

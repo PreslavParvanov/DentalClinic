@@ -46,6 +46,7 @@ builder.Services.AddScoped<IErrorService, ErrorService>();
 builder.Services.AddScoped<IDentalService, DentalSrvService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IReceptionService, ReceptionService>();
+builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
 var app = builder.Build();
 
@@ -71,10 +72,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+    
 
     endpoints.MapControllerRoute(
       name: "default",
@@ -82,8 +80,8 @@ app.UseEndpoints(endpoints =>
     );
 
     endpoints.MapControllerRoute(
-      name: "houseDetails",
-      pattern: "House/Details/{id}/{information}"
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
     endpoints.MapRazorPages();
