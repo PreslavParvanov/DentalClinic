@@ -69,6 +69,7 @@ namespace DentalClinic.Areas.Admin.Controllers
                 if (doctor == null)
                 {
                     var imageUrl = await cloudinaryService.UploadImage(filePath);
+                    model.ImageUrl = imageUrl;
                     await doctorService.Create(model);
                 }
                 else

@@ -33,7 +33,8 @@ namespace DentalClinic.BL.Service
                     Id = d.Id,
                     Name = d.Name,
                     Qualification = d.Qualification,
-                    MoreInfo = d.MoreInfo
+                    MoreInfo = d.MoreInfo,
+                    ImageUrl = d.ImageUrl
                 }).ToListAsync();
 
             return result;
@@ -75,7 +76,8 @@ namespace DentalClinic.BL.Service
                     Id = d.Id,
                     Name = d.Name,
                     Qualification = d.Qualification,
-                    MoreInfo = d.MoreInfo
+                    MoreInfo = d.MoreInfo,
+                    ImageUrl = d.ImageUrl
                 }).ToListAsync();
 
             return result;

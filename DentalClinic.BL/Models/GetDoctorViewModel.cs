@@ -19,5 +19,9 @@ namespace DentalClinic.BL.Models
         [MinLength(1), MaxLength(1000)]
         public string MoreInfo { get; set; } = null!;
 
+        [Required]
+        [MinLength(5), MaxLength(1000)]
+        public string ImageUrl { get; set; } = null!;
+
     }
 }
