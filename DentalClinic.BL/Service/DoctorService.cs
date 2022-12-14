@@ -54,7 +54,8 @@ namespace DentalClinic.BL.Service
                 MoreInfo = doctorViewModel.MoreInfo,
                 IsActive = 1,
                 Who = doctorViewModel.Who,
-                When = DateTime.Now
+                When = DateTime.Now,
+                ImageUrl = doctorViewModel.ImageUrl
             };
 
             await repo.AddAsync(doctor);

@@ -33,7 +33,8 @@ namespace DentalClinic.UnitTests
                     MoreInfo = "Doctor Radeva has 5 years of experience as a dentist.",
                     IsActive = 1,
                     Who="0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                    When = DateTime.Now
+                    When = DateTime.Now,
+                    ImageUrl = "https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968871/azcedswiusclsovhog5p.jpg"
                 },
                 new Doctor
                 {
@@ -43,7 +44,8 @@ namespace DentalClinic.UnitTests
                     MoreInfo = "Doctor Valeva has 3 years of experience as a оrthodontist.",
                     IsActive = 1,
                     Who="0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                    When = DateTime.Now
+                    When = DateTime.Now,
+                    ImageUrl = "https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968871/azcedswiusclsovhog5p.jpg"
                 }
             };
 
@@ -81,6 +83,7 @@ namespace DentalClinic.UnitTests
                         Assert.That(orderListResultService[i].Name, Is.EqualTo(resultDb[i].Name));
                         Assert.That(resultDb[i].Qualification, Is.EqualTo(orderListResultService[i].Qualification));
                         Assert.That(resultDb[i].MoreInfo, Is.EqualTo(orderListResultService[i].MoreInfo));
+                        Assert.That(resultDb[i].ImageUrl, Is.EqualTo(orderListResultService[i].ImageUrl));
                     }
                 }
             }
@@ -113,6 +116,7 @@ namespace DentalClinic.UnitTests
                         Assert.That(orderListResultService[i].Name, Is.EqualTo(resultDb[i].Name));
                         Assert.That(resultDb[i].Qualification, Is.EqualTo(orderListResultService[i].Qualification));
                         Assert.That(resultDb[i].MoreInfo, Is.EqualTo(orderListResultService[i].MoreInfo));
+                        Assert.That(resultDb[i].ImageUrl, Is.EqualTo(orderListResultService[i].ImageUrl));
                     }
                 }
             }
@@ -137,7 +141,7 @@ namespace DentalClinic.UnitTests
                     Qualification = "Dentist",
                     MoreInfo = "More Info",
                     Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-
+                    ImageUrl = "https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968871/azcedswiusclsovhog5p.jpg"
                 };
 
                 await doctorService.Create(doctor);
@@ -148,6 +152,7 @@ namespace DentalClinic.UnitTests
                     Assert.That(doctor.Qualification, Is.EqualTo(resultDb[0].Qualification));
                     Assert.That(doctor.MoreInfo, Is.EqualTo(resultDb[0].MoreInfo));
                     Assert.That(doctor.Who, Is.EqualTo(resultDb[0].Who));
+                    Assert.That(doctor.ImageUrl, Is.EqualTo(resultDb[0].ImageUrl));
                 }
                 else
                 {
@@ -183,6 +188,7 @@ namespace DentalClinic.UnitTests
                         Assert.That(orderListResultService[i].Name, Is.EqualTo(resultDb[i].Name));
                         Assert.That(resultDb[i].Qualification, Is.EqualTo(orderListResultService[i].Qualification));
                         Assert.That(resultDb[i].MoreInfo, Is.EqualTo(orderListResultService[i].MoreInfo));
+                        Assert.That(resultDb[i].ImageUrl, Is.EqualTo(orderListResultService[i].ImageUrl));
                     }
                 }
             }
@@ -208,7 +214,7 @@ namespace DentalClinic.UnitTests
                     startDate = DateTime.Now.Date,
                     endDate = DateTime.Now.Date,
                     IsBusy = true,
-                    Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa"
+                    Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
                 };
 
                 await doctorService.CreateSchedule(doctorSchedule, startTime, endTime);
