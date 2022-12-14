@@ -148,7 +148,8 @@ namespace DentalClinic.BL.Service
                     Name = d.Name,
                     Qualification = d.Qualification,
                     MoreInfo = d.MoreInfo,
-                    Who = d.Who
+                    Who = d.Who,
+                    ImageUrl = d.ImageUrl
                 })
                 .ToListAsync();
             return result;
