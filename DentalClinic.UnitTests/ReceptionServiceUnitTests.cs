@@ -30,7 +30,8 @@ namespace DentalClinic.UnitTests
                 Qualification = "4 Year",
                 MoreInfo = "Doctor More Info",
                 Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
-                When = DateTime.Now
+                When = DateTime.Now,
+                ImageUrl = "https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968871/azcedswiusclsovhog5p.jpg"
             };
             doctorCustomers = new List<DoctorCustomer>()
             {

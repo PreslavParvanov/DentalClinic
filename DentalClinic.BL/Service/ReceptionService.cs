@@ -38,7 +38,7 @@ namespace DentalClinic.BL.Service
                     CustomerId = ds.CustomerId,
                     CustomerName = ds.CustomerName,
                     CustomerEmail = ds.CustomerEmail,
-                    CustomerPhone = ds.CustomerPhone
+                    CustomerPhone = ds.CustomerPhone,
                 })
                 .OrderBy(ds => ds.DoctorName)
                 .ThenBy(ds => ds.DateTimeSchedule)
