@@ -58,14 +58,13 @@
                                 if (col > 0 && row > 0 && @matrix[row, col] != null)
                                 {
                                     <td scope="col" scope="col">
-                                        <form method="post">
+                                        <form method="post" asp-area="Admin" asp-controller="Reception" asp-action="ReceptionDet">
                                             @{
                                                 List<string> matrxInfo = matrix[row, col].Split(';').ToList();
                                             }
                                             <input asp-for="@matrxInfo[1]" type="text" name="DoctorId" placeholder="DoctorId" required hidden />
                                             <input asp-for="@matrxInfo[2]" type="text" name="CustomerId" placeholder="CustomerId" required hidden />
                                             <input asp-for="@matrxInfo[3]" type="text" name="curenttDate" placeholder="curenttDate" required hidden />
-                                            <input type="text" name="Type" placeholder="Type" value="DET" required hidden />
                                             <button class="ds-free">@matrxInfo[0]</button>
                                         </form>
                                     </td>

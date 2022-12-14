@@ -17,14 +17,32 @@
         <input type="text" name="Type" placeholder="Type" value="HDR" required hidden />
         <button class="usr-btn" type="submit">Save</button>
     </div>
+    <input type="submit" id="addRow" value="add">
     <div>
-        <table>
+        <table class="table table-striped">
             <thead>
-                <th>Service</th>
+                <tr>
+                    <th scope="col">Service</th>
+                </tr>
             </thead>
             <tbody>
-                <td>test</td>
+                <tr>
+                    <td scope="col">test</td>
+                </tr>
             </tbody>
         </table>
     </div>
 </form>
+<script>
+    var myBtn = document.getElementById('addRow');
+    myBtn.addEventListener('click', function (e) {
+        e.preventDefault(); //This prevents the default action
+        let table = document.querySelectorAll('table');
+        let tableRow = table[0].querySelectorAll('tr');
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        td1.textContent = tableRow[1].querySelectorAll('td')[0].textContent;
+        tr.appendChild(td1);
+        table[0].querySelectorAll('tbody')[0].appendChild(tr);
+    });
+    </script>
