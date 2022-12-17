@@ -17,6 +17,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Reception()
         {
+            ViewData["Title"] = "Dental Clinic";
             ViewBag.dateSearch = DateTime.Now;
             return View();
         }
@@ -24,7 +25,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Reception(DateTime DateSearch)
         {
-
+            ViewData["Title"] = "Dental Clinic";
             TimeSpan startTime = new TimeSpan(00, 00, 00);
             TimeSpan endTime = new TimeSpan(23, 59, 59);
             DateTime startDate = DateSearch + startTime;

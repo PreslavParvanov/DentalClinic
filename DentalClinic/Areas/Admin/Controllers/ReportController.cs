@@ -33,6 +33,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Dentists()
         {
+            
             var result = await reportService.GetAllDentists();
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             string reportUserName = "";
@@ -49,6 +50,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DentistSchedule()
         {
+            
             var model = new DoctorScheduleViewModel()
             {
                 Doctors = await doctorService.GetDoctorsAsync()
@@ -59,6 +61,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DentistSchedule(Guid DoctorId, DateTime startDate, DateTime endDate)
         {
+            
             var result = await reportService.GetDentistScheduleByDate(DoctorId, startDate, endDate);
             var doctor = await doctorService.GetDoctorById(DoctorId);
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -78,6 +81,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DentistCustomer()
         {
+            
             var model = new DoctorCustomerViewModel()
             {
                 Doctors = await doctorService.GetDoctorsAsync()
@@ -88,6 +92,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DentistCustomer(DoctorCustomerViewModel model)
         {
+            
             TimeSpan startTime = new TimeSpan(00, 00, 00);
             TimeSpan endTime = new TimeSpan(23, 59, 59);
             DateTime startDate = model.DateTimeSchedule + startTime;
