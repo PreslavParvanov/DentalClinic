@@ -188,7 +188,7 @@ body {
     padding: 10px;
 }
 
-.doctor-info-summary {
+.summary-info {
     margin: auto;
     text-align: center;
     color: gray;
@@ -197,7 +197,7 @@ body {
     animation-delay: 5s;
 }
 
-.doctor-info-details {
+.info-details {
     margin: auto;
     text-align: center;
     color: gray;
