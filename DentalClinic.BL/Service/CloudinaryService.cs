@@ -21,23 +21,14 @@ namespace DentalClinic.BL.Service
 
         public async Task<string> UploadImage(string filePath)
         {
-            string result = "";
-            try
+            Cloudinary _cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
             {
-                Cloudinary _cloudinary = new Cloudinary(account);
-                var uploadParams = new ImageUploadParams()
-                {
-                    File = new FileDescription(filePath)
-                };
-                var uploadResult = _cloudinary.Upload(uploadParams);
-                result = uploadResult.Uri.ToString();
-            }
-            catch (Exception ex)
-            {
-                result = ex.Message.ToString();
-            }
+                File = new FileDescription(filePath)
+            };
+            var uploadResult = _cloudinary.Upload(uploadParams);
 
-            return result;
+            return uploadResult.Uri.ToString(); 
         }
     }
 }

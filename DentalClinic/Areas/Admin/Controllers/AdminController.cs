@@ -82,9 +82,10 @@ namespace DentalClinic.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 await errorService.DCLog(ex);
+                ModelState.AddModelError("", "Something went wrong. Try shorter.");
                 return View(model);
             }
-            return RedirectToAction(nameof(CreateDentist));
+            return RedirectToAction("CreateDentist", "AdminController");
         }
 
         [HttpGet]
