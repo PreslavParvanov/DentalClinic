@@ -58,7 +58,7 @@
                                 if (col > 0 && row > 0 && @matrix[row, col] != null)
                                 {
                                     <td scope="col" scope="col">
-                                        <form method="post" asp-area="Admin" asp-controller="Reception" asp-action="ReceptionDet">
+                                        <form method="post" asp-area="Admin" asp-controller="Reception" asp-action="ReceptionCustomer">
                                             @{
                                                 List<string> matrxInfo = matrix[row, col].Split(';').ToList();
                                             }

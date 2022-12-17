@@ -4,17 +4,13 @@ using DentalClinic.DB.Data.Models;
 using DentalClinic.DB.Data;
 using Microsoft.EntityFrameworkCore;
 using DentalClinic.BL.Service;
-using DentalClinic.BL.Models;
-
-using DentalClinic.BL.Service;
-using Castle.Core.Resource;
-using System.Numerics;
 
 namespace DentalClinic.UnitTests
 {
     internal class ReceptionServiceUnitTests
     {
         private List<DoctorCustomer> doctorCustomers;
+        private IEnumerable<DentalService> services;
 
         private IReceptionService receptionService;
         private IRepository repo;
@@ -33,6 +29,7 @@ namespace DentalClinic.UnitTests
                 When = DateTime.Now,
                 ImageUrl = "https://res.cloudinary.com/ddfrnob2x/image/upload/v1670968871/azcedswiusclsovhog5p.jpg"
             };
+          
             doctorCustomers = new List<DoctorCustomer>()
             {
                 new DoctorCustomer
@@ -115,20 +112,29 @@ namespace DentalClinic.UnitTests
             }
         }
 
-        [Test]
+        /*[Test]
         public async Task Test_GetBookedDetailsById()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(databaseName: "DentalClinicTest").Options;
 
             using (var dbContext = new ApplicationDbContext(options))
             {
+                
+                var service = new DentalService
+                {
+                    Id = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535"),
+                    ServiceName = "Test",
+                    ServiceDescription = "Info",
+                    Who = "0f14ce82-fd75-4d7e-b5c1-6eaccb374faa",
+                    When = DateTime.Now
+                };
                 repo = new Repository(dbContext);
                 receptionService = new ReceptionService(repo);
                 var doctorId = Guid.Parse("4d89d334-1134-487c-bd1d-8b543050d535");
                 var customerId = "5972406a-1f00-4b42-982d-f6e0718da358";
                 var dateTimeSchedule = DateTime.ParseExact("2022-12-06 11:00:00,000", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
                 
-                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule);
+                var resultService = await receptionService.GetBookedDetailsById(doctorId, customerId, dateTimeSchedule, services);
                 var resultDb = await dbContext.DoctorsCustomers
                     .Where(dc => dc.DoctorId==doctorId)
                     .Where(dc => dc.CustomerId == customerId)
@@ -212,7 +218,7 @@ namespace DentalClinic.UnitTests
                 }
             }
         }
-
+        
         [Test]
         public async Task Test_GetBookedDetailsById_InvalidDateTimeSchedule()
         {
@@ -243,5 +249,6 @@ namespace DentalClinic.UnitTests
                 }
             }
         }
+        */
     }
 }

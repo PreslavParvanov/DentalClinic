@@ -1,6 +1,9 @@
 ﻿using DentalClinic.BL.Contracts;
+using DentalClinic.BL.Models;
+using DentalClinic.BL.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace DentalClinic.Areas.Admin.Controllers
 {
@@ -8,24 +11,25 @@ namespace DentalClinic.Areas.Admin.Controllers
     public class ReceptionController : AdminBaseController
     {
         private readonly IReceptionService resectionService;
+        private readonly IDentalService detnalServices;
 
-        public ReceptionController(IReceptionService _resectionService)
+        public ReceptionController(IReceptionService _resectionService
+                                   ,IDentalService _detnalServices)
         {
             resectionService = _resectionService;
+            detnalServices = _detnalServices;
         }
 
         [HttpGet]
         public IActionResult Reception()
         {
-            ViewData["Title"] = "Dental Clinic";
-            ViewBag.dateSearch = DateTime.Now;
+            ViewBag.dateSearch = DateTime.Now.ToString("yyyy-MM-dd");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Reception(DateTime DateSearch)
         {
-            ViewData["Title"] = "Dental Clinic";
             TimeSpan startTime = new TimeSpan(00, 00, 00);
             TimeSpan endTime = new TimeSpan(23, 59, 59);
             DateTime startDate = DateSearch + startTime;
@@ -37,10 +41,18 @@ namespace DentalClinic.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReceptionDet(Guid DoctorId, string CustomerId, DateTime curenttDate)
+        public async Task<IActionResult> ReceptionCustomer(Guid DoctorId, string CustomerId, DateTime curenttDate)
         {
-            var result = await resectionService.GetBookedDetailsById(DoctorId, CustomerId, curenttDate);
-            return View("ReceptionDet", result);
+            var detnalService = await detnalServices.GetAll();
+            var result = await resectionService.GetBookedDetailsById(DoctorId, CustomerId, curenttDate, detnalService);
+            return View("ReceptionCustomer", result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ReceptionCustomerServices(ReceptionCustomerViewModel mode, Guid Test)
+        {
+            
+            return View();
         }
     }
 }

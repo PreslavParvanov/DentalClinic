@@ -46,13 +46,13 @@ namespace DentalClinic.BL.Service
             return result;
         }
 
-        public async Task<ReceptionViewModel> GetBookedDetailsById(Guid DoctorId, string CustomerId, DateTime DateTimeSchedule)
+        public async Task<ReceptionCustomerViewModel> GetBookedDetailsById(Guid DoctorId, string CustomerId, DateTime DateTimeSchedule,IEnumerable<DentalServiceViewModel> dentalService)
         {
             var result = await repo.AllReadonly<DoctorCustomer>()
                .Where(ds => ds.DateTime == DateTimeSchedule
                         && ds.CustomerId==CustomerId
                         && ds.DateTime== DateTimeSchedule)
-               .Select(ds => new ReceptionViewModel()
+               .Select(ds => new ReceptionCustomerViewModel()
                {
                    DoctorId = ds.DoctorId,
                    DoctorName = ds.Doctors.Name,
@@ -60,11 +60,12 @@ namespace DentalClinic.BL.Service
                    CustomerId = ds.CustomerId,
                    CustomerName = ds.CustomerName,
                    CustomerEmail = ds.CustomerEmail,
-                   CustomerPhone = ds.CustomerPhone
+                   CustomerPhone = ds.CustomerPhone,
                })
                .OrderBy(ds => ds.DoctorName)
                .ThenBy(ds => ds.DateTimeSchedule)
                .FirstOrDefaultAsync();
+            result.DentalServices = dentalService;
             return result;
         }
     }

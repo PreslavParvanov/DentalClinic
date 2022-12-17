@@ -49,6 +49,7 @@ namespace DentalClinic.BL.Service
                 var result = await repo.AllReadonly<DentalService>()
                 .Select(ds => new DentalServiceViewModel()
                 {
+                    Id = ds.Id,
                     ServiceName = ds.ServiceName,
                     ServiceDescription = ds.ServiceDescription,
                 }).ToListAsync();

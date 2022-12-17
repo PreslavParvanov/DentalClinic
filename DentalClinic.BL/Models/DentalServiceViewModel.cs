@@ -10,6 +10,7 @@ namespace DentalClinic.BL.Models
 {
     public class DentalServiceViewModel
     {
+        public Guid Id { get; set; }
         [Required]
         [MaxLength(100)]
         [MinLength(1)]
