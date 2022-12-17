@@ -259,14 +259,14 @@ body {
     }
 
     .login-form .form-field:nth-child(1)::before {
-        background-image: url(../img/email-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671288940/email-icon_hzivxb.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .login-form .form-field:nth-child(3)::before {
-        background-image: url(../img/lock-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671288992/lock-icon_enrwe0.png);
         width: 20px;
         height: 20px;
         top: 15px;
@@ -342,42 +342,42 @@ body {
     }
 
     .registration-form .form-field:nth-child(1)::before {
-        background-image: url(../img/user-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289295/user-icon_utxsq1.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .registration-form .form-field:nth-child(3)::before {
-        background-image: url(../img/user-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289295/user-icon_utxsq1.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .registration-form .form-field:nth-child(5)::before {
-        background-image: url(../img/email-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671288940/email-icon_hzivxb.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .registration-form .form-field:nth-child(7)::before {
-        background-image: url(../img/phone-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289060/phone-icon_bulo1l.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .registration-form .form-field:nth-child(9)::before {
-        background-image: url(../img/lock-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671288992/lock-icon_enrwe0.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .registration-form .form-field:nth-child(11)::before {
-        background-image: url(../img/lock-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671288992/lock-icon_enrwe0.png);
         width: 20px;
         height: 20px;
         top: 15px;
@@ -452,21 +452,21 @@ body {
     }
 
     .create-dentist-form .form-field:nth-child(1)::before {
-        background-image: url(../img/user-icon.png);
-        width: 20px;
-        height: 20px;
-        top: 15px;
-    }
-
-    .create-dentist-form .form-field:nth-child(2)::before {
-        background-image: url(../img/job-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289295/user-icon_utxsq1.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .create-dentist-form .form-field:nth-child(3)::before {
-        background-image: url(../img/more-info-icon.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289249/job-icon_axdqbx.jpg);
+        width: 20px;
+        height: 20px;
+        top: 15px;
+    }
+
+    .create-dentist-form .form-field:nth-child(5)::before {
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289153/more-info-icon_aeokrn.jpg);
         width: 20px;
         height: 20px;
     }
@@ -562,14 +562,14 @@ body {
     }
 
     .create-dentist-schedule-form .create-dentist-schedule-field:nth-child(2)::before {
-        background-image: url(../img/calendar-ico.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289097/calendar-ico_yruxnw.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .create-dentist-schedule-form .create-dentist-schedule-field:nth-child(4)::before {
-        background-image: url(../img/calendar-ico.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289097/calendar-ico_yruxnw.png);
         width: 20px;
         height: 20px;
         top: 15px;
@@ -627,14 +627,14 @@ body {
     }
 
     .doctor-scedul-form .doctor-scedul-field:nth-child(2)::before {
-        background-image: url(../img/calendar-ico.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289097/calendar-ico_yruxnw.png);
         width: 20px;
         height: 20px;
         top: 15px;
     }
 
     .doctor-scedul-form .doctor-scedul-field:nth-child(4)::before {
-        background-image: url(../img/calendar-ico.png);
+        background-image: url(https://res.cloudinary.com/ddfrnob2x/image/upload/v1671289097/calendar-ico_yruxnw.png);
         width: 20px;
         height: 20px;
         top: 15px;

@@ -2,10 +2,12 @@
 using DentalClinic.BL.Contracts;
 using DentalClinic.BL.Models;
 using DentalClinic.BL.Service;
+using DentalClinic.DB.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace DentalClinic.Areas.Admin.Controllers
@@ -89,8 +91,9 @@ namespace DentalClinic.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateSchedule()
+        public async Task<IActionResult> CreateSchedule(string info)
         {
+            ViewBag.Info = info;
             var model = new DoctorScheduleViewModel()
             {
                 Doctors = await doctorService.GetDoctorsAsync()
@@ -102,6 +105,7 @@ namespace DentalClinic.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSchedule(DoctorScheduleViewModel doctorScheduleViewModel, TimeSpan startTime, TimeSpan endTime)
         {
+            ViewData["Title"] = "Dental Clinic";
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userId != null)
             {
@@ -128,8 +132,19 @@ namespace DentalClinic.Areas.Admin.Controllers
             var result = await doctorService.GetDoctorSchedule(doctorScheduleViewModel.DoctorId, doctorScheduleViewModel.startDate, doctorScheduleViewModel.endDate);
             if (result.Count() == 0)
             {
-                await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
-                return RedirectToAction(nameof(CreateSchedule));
+                try
+                {
+                    await doctorService.CreateSchedule(doctorScheduleViewModel, startTime, endTime);
+                    string info = $"The schedule has been added successfully.";
+                    
+                    return RedirectToAction(nameof(CreateSchedule), new { info = info });
+                }
+                catch (Exception ex)
+                {
+                    await errorService.DCLog(ex);
+                    ModelState.AddModelError("", "Something went wrong. Try shorter.");
+                    return View(doctorScheduleViewModel);
+                }
             }
             else
             {

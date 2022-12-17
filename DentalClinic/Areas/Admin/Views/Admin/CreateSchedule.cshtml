@@ -1,6 +1,7 @@
 ﻿@model DoctorScheduleViewModel
 
 <form class="create-dentist-schedule-form" method="post">
+    <p class="container h-100 d-flex justify-content-center">@ViewBag.info</p>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-field">
         <select asp-for="@Model.DoctorId" class="form-control">
